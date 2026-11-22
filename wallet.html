@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Wallet | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 950px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 22px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+    }
+
+    .back-link {
+      color: #c5b5ff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 32px 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin: 10px 0;
+    }
+
+    .hero p {
+      color: #aaaac5;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .balance-card {
+      padding: 25px;
+      margin: 20px 0;
+      border: 1px solid #6546a4;
+      border-radius: 15px;
+      background:
+        radial-gradient(circle at top right, #6640a6, transparent 60%),
+        linear-gradient(130deg, #21183c, #111126);
+    }
+
+    .balance-label {
+      color: #d4c5ff;
+      font-size: 12px;
+    }
+
+    .balance {
+      display: block;
+      margin: 13px 0 8px;
+      font-size: clamp(30px, 7vw, 42px);
+      font-weight: 900;
+    }
+
+    .balance-note {
+      color: #c4b8dc;
+      font-size: 11px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .summary-card {
+      padding: 17px;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 11px;
+    }
+
+    .summary-card span {
+      display: block;
+      color: #9292ae;
+      font-size: 10px;
+      margin-bottom: 10px;
+    }
+
+    .summary-card strong {
+      font-size: 18px;
+      color: #c5a9ff;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .action-btn {
+      padding: 15px 10px;
+      border: none;
+      border-radius: 9px;
+      background: linear-gradient(120deg, #8b5cf6, #397bff);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .action-btn.secondary {
+      background: #21183a;
+      border: 1px solid #6546a4;
+      color: #dfd2ff;
+    }
+
+    .notice {
+      padding: 13px;
+      margin: 18px 0;
+      background: #29213d;
+      border: 1px solid #614b91;
+      border-radius: 9px;
+      color: #dfd2ff;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      margin: 30px 0 15px;
+      font-size: 18px;
+    }
+
+    .panel {
+      padding: 18px;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 12px;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #aaaac5;
+      font-size: 12px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 13px;
+      background: #080817;
+      border: 1px solid #39305f;
+      border-radius: 8px;
+      color: white;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: #9a78f5;
+    }
+
+    .disabled-btn {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #39304f;
+      color: #c5b5d9;
+      font-weight: bold;
+      cursor: not-allowed;
+    }
+
+    .account-note {
+      color: #9292ae;
+      font-size: 11px;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+
+    .empty {
+      padding: 25px 12px;
+      text-align: center;
+      color: #aaaac5;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .empty-icon {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      padding: 35px 0 15px;
+      color: #77778f;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    @media(min-width: 650px) {
+      .summary-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="header">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">IA</span>
+        <span>IGEE <strong>ARENA</strong></span>
+      </a>
+
+      <a href="dashboard.html" class="back-link">
+        MY DASHBOARD →
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>MY WALLET</h1>
+      <p>
+        Manage your funds, deposits, withdrawals and
+        match reservations in one place.
+      </p>
+    </section>
+
+    <section class="balance-card">
+      <div class="balance-label">AVAILABLE BALANCE</div>
+      <strong class="balance">₦0.00</strong>
+      <div class="balance-note">
+        Preview balance — not connected to a live account
+      </div>
+    </section>
+
+    <section class="summary-grid">
+
+      <div class="summary-card">
+        <span>RESERVED FOR MATCHES</span>
+        <strong>₦0.00</strong>
+      </div>
+
+      <div class="summary-card">
+        <span>PENDING WITHDRAWALS</span>
+        <strong>₦0.00</strong>
+      </div>
+
+      <div class="summary-card">
+        <span>TOTAL EARNINGS</span>
+        <strong>₦0.00</strong>
+      </div>
+
+    </section>
+
+    <section class="actions">
+      <button class="action-btn" type="button" disabled>
+        DEPOSIT FUNDS
+      </button>
+
+      <button class="action-btn secondary" type="button" disabled>
+        WITHDRAW FUNDS
+      </button>
+    </section>
+
+    <div class="notice">
+      <strong>Payment system not activated.</strong>
+      Deposits and withdrawals are currently disabled.
+      They will be connected through a secure backend
+      after the required payment-provider approval.
+    </div>
+
+    <h2 class="section-title">DEPOSIT FUNDS</h2>
+
+    <section class="panel">
+      <div class="field">
+        <label for="depositAmount">Amount (₦)</label>
+        <input
+          id="depositAmount"
+          type="number"
+          min="1"
+          placeholder="Enter deposit amount"
+          disabled
+        >
+      </div>
+
+      <button class="disabled-btn" type="button" disabled>
+        DEPOSIT UNAVAILABLE
+      </button>
+
+      <p class="account-note">
+        Deposits will use a secure payment checkout.
+        Your wallet will only be credited after verified
+        payment confirmation from the payment provider.
+      </p>
+    </section>
+
+    <h2 class="section-title">WITHDRAW FUNDS</h2>
+
+    <section class="panel">
+
+      <div class="field">
+        <label for="bankName">Select Bank</label>
+        <select id="bankName" disabled>
+          <option value="">Bank selection will be available later</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="accountNumber">Account Number</label>
+        <input
+          id="accountNumber"
+          type="text"
+          inputmode="numeric"
+          maxlength="10"
+          placeholder="Enter your 10-digit account number"
+          disabled
+        >
+      </div>
+
+      <div class="field">
+        <label for="accountHolder">Verified Account Holder Name</label>
+        <input
+          id="accountHolder"
+          type="text"
+          placeholder="Automatically verified by bank service"
+          disabled
+        >
+      </div>
+
+      <div class="field">
+        <label for="withdrawAmount">Withdrawal Amount (₦)</label>
+        <input
+          id="withdrawAmount"
+          type="number"
+          min="1"
+          placeholder="Enter withdrawal amount"
+          disabled
+        >
+      </div>
+
+      <button class="disabled-btn" type="button" disabled>
+        WITHDRAWAL UNAVAILABLE
+      </button>
+
+      <p class="account-note">
+        Bank account verification will securely resolve
+        the official account holder name after you select
+        a bank and enter your account number. You will
+        confirm the verified details before requesting
+        a withdrawal.
+      </p>
+
+    </section>
+
+    <h2 class="section-title">TRANSACTION HISTORY</h2>
+
+    <section class="panel">
+      <div class="empty">
+        <div class="empty-icon">💳</div>
+        <strong>No transactions yet</strong>
+        <p>
+          Your deposits, withdrawals, match payments,
+          winnings and refunds will appear here.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>IGEE ARENA — COMPETE WITH SKILL. WIN WITH HONOUR.</p>
+      <p>© <span id="year"></span> IGEE ARENA</p>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
