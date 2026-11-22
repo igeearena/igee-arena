@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Challenges | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 1150px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 22px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+    }
+
+    .back-link {
+      color: #c5b5ff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 35px 0 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 42px);
+      margin: 12px 0;
+    }
+
+    .hero p {
+      color: #aaaac5;
+      line-height: 1.7;
+      font-size: 14px;
+      max-width: 650px;
+    }
+
+    .notice {
+      padding: 14px;
+      margin: 15px 0 25px;
+      background: #29213d;
+      border: 1px solid #614b91;
+      color: #dfd2ff;
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 28px 0 15px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 15px;
+      border: 1px solid #39305f;
+      border-radius: 25px;
+      background: #111126;
+      color: #c9c4df;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #7446d6;
+      border-color: #a78bfa;
+      color: white;
+    }
+
+    .panel {
+      padding: 20px;
+      border: 1px solid #292943;
+      border-radius: 12px;
+      background: #111126;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #39305f;
+      border-radius: 8px;
+      background: #09091a;
+      color: white;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .form-group textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #a78bfa;
+    }
+
+    .form-help {
+      display: block;
+      margin-top: 7px;
+      color: #9292ae;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .main-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(120deg, #8b5cf6, #397bff);
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .challenge-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .empty-state {
+      padding: 30px 15px;
+      text-align: center;
+      color: #aaaac5;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .challenge-card {
+      padding: 17px;
+      border: 1px solid #39305f;
+      background: #111126;
+      border-radius: 12px;
+    }
+
+    .challenge-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .challenge-top h3 {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .status {
+      color: #d8c7ff;
+      background: #30204d;
+      padding: 6px 9px;
+      border-radius: 5px;
+      font-size: 10px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .challenge-details {
+      color: #aaaac5;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .challenge-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .small-btn {
+      padding: 9px 13px;
+      border: 1px solid #614b91;
+      border-radius: 6px;
+      background: #29213d;
+      color: white;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .message {
+      display: none;
+      padding: 12px;
+      margin-top: 15px;
+      border: 1px solid #614b91;
+      border-radius: 8px;
+      background: #29213d;
+      color: #dfd2ff;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 35px 0 15px;
+      color: #77778f;
+      font-size: 11px;
+    }
+
+    @media(min-width: 700px) {
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 15px;
+      }
+    }
+
+    @media(max-width: 420px) {
+      .page { padding: 14px; }
+      .panel { padding: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="header">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">IA</span>
+        <span>IGEE <strong>ARENA</strong></span>
+      </a>
+
+      <a href="dashboard.html" class="back-link">
+        MY DASHBOARD →
+      </a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">PROVE YOUR SKILL</span>
+      <h1>PLAYER CHALLENGES</h1>
+      <p>
+        Find opponents, create competitions and prepare
+        to prove yourself in the arena.
+      </p>
+    </section>
+
+    <div class="notice">
+      <strong>Competition preview:</strong>
+      Challenge creation, acceptance and match tracking
+      will be activated after secure backend integration.
+      No entry fees or real-money matches are active here.
+    </div>
+
+    <h2 class="section-title">CREATE A CHALLENGE</h2>
+
+    <section class="panel">
+      <form id="challengeForm">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="game">Select Game</label>
+            <select id="game" required>
+              <option value="">Choose a game</option>
+              <option>Dream League Soccer 2026</option>
+              <option>Call of Duty Mobile</option>
+              <option>Mobile Legends</option>
+              <option>eFootball 2026</option>
+              <option>PUBG Mobile</option>
+              <option>Free Fire</option>
+              <option>GTA V</option>
+              <option>Fortnite</option>
+              <option>Clash of Clans</option>
+              <option>Clash Royale</option>
+              <option>Among Us</option>
+              <option>Minecraft</option>
+              <option>Asphalt Legends</option>
+              <option>8 Ball Pool</option>
+              <option>Brawl Stars</option>
+              <option>Genshin Impact</option>
+              <option>Subway Surfers</option>
+              <option>Candy Crush Saga</option>
+              <option>Temple Run 2</option>
+              <option>Roblox</option>
+              <option>Valorant</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="opponent">Opponent Player ID</label>
+            <input
+              type="text"
+              id="opponent"
+              placeholder="Enter 6-digit player ID"
+              inputmode="numeric"
+              pattern="[0-9]{6}"
+              maxlength="6"
+              required
+            >
+            <span class="form-help">
+              Enter the unique player ID of the person you want to challenge.
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="mode">Competition Mode</label>
+            <select id="mode" required>
+              <option value="">Select a mode</option>
+              <option>One-on-One</option>
+              <option>Team Competition</option>
+              <option>Score Challenge</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="schedule">Preferred Match Time</label>
+            <input type="datetime-local" id="schedule" required>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="rules">Additional Match Details</label>
+          <textarea
+            id="rules"
+            maxlength="500"
+            placeholder="Add any agreed match details or rules..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="main-btn">
+          CREATE CHALLENGE
+        </button>
+
+        <div class="message" id="formMessage"></div>
+      </form>
+    </section>
+
+    <h2 class="section-title">YOUR CHALLENGES</h2>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="all">ALL</button>
+      <button class="tab" data-tab="incoming">INCOMING</button>
+      <button class="tab" data-tab="outgoing">OUTGOING</button>
+      <button class="tab" data-tab="active">ACTIVE MATCHES</button>
+    </div>
+
+    <section class="challenge-list" id="challengeList">
+      <div class="empty-state">
+        <div style="font-size:35px; margin-bottom:10px;">⚔️</div>
+        <strong>No challenges yet</strong>
+        <p>
+          Your incoming, outgoing and active matches
+          will appear here after your account is connected.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>IGEE ARENA — COMPETE WITH SKILL. WIN WITH HONOUR.</p>
+      <p>© <span id="year"></span> IGEE ARENA</p>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const challengeForm = document.getElementById("challengeForm");
+    const formMessage = document.getElementById("formMessage");
+
+    challengeForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      formMessage.style.display = "block";
+      formMessage.textContent =
+        "Your challenge form is ready. Challenge creation will work after secure account and match integration.";
+    });
+
+    document.querySelectorAll(".tab").forEach(function(tab) {
+      tab.addEventListener("click", function() {
+        document.querySelectorAll(".tab").forEach(function(item) {
+          item.classList.remove("active");
+        });
+
+        tab.classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
