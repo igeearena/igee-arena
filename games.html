@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Games | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .games-page {
+      max-width: 1250px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .games-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 22px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .games-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+    }
+
+    .back-link {
+      color: #c5b5ff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .games-hero {
+      padding: 40px 0 25px;
+    }
+
+    .games-hero h1 {
+      font-size: clamp(29px, 6vw, 44px);
+      margin: 12px 0;
+    }
+
+    .games-hero p {
+      max-width: 600px;
+      color: #aaaac5;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 550px;
+      margin: 15px 0 22px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 9px;
+      border: 1px solid #39305f;
+      background: #111126;
+      color: white;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: #a78bfa;
+    }
+
+    .category-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 25px;
+    }
+
+    .category-btn {
+      padding: 10px 15px;
+      border: 1px solid #39305f;
+      border-radius: 30px;
+      background: #111126;
+      color: #c9c4df;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .category-btn.active {
+      background: #7446d6;
+      border-color: #a78bfa;
+      color: white;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .game-card {
+      overflow: hidden;
+      border-radius: 12px;
+      background: #111126;
+      border: 1px solid #292943;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      border-color: #8b5cf6;
+    }
+
+    .game-art {
+      min-height: 115px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 30%, #54348b, transparent 70%),
+        linear-gradient(135deg, #1c1740, #10162e);
+      font-size: 48px;
+    }
+
+    .game-info {
+      padding: 14px;
+    }
+
+    .game-info h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .game-category {
+      color: #b69aff;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .game-info p {
+      color: #aaaac5;
+      font-size: 11px;
+      line-height: 1.5;
+      min-height: 34px;
+    }
+
+    .game-status {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 6px 9px;
+      border-radius: 5px;
+      background: #25213d;
+      color: #c5b5ff;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .no-results {
+      display: none;
+      color: #aaaac5;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .games-footer {
+      text-align: center;
+      color: #77778f;
+      font-size: 11px;
+      padding: 35px 0 15px;
+    }
+
+    @media(min-width: 650px) {
+      .games-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .game-art { min-height: 155px; }
+    }
+
+    @media(min-width: 950px) {
+      .games-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    @media(max-width: 380px) {
+      .games-page { padding: 14px; }
+      .games-grid { gap: 9px; }
+      .game-info { padding: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="games-page">
+
+    <header class="games-header">
+      <a href="index.html" class="games-brand">
+        <span class="brand-mark">IA</span>
+        <span>IGEE <strong>ARENA</strong></span>
+      </a>
+
+      <a href="dashboard.html" class="back-link">
+        MY DASHBOARD →
+      </a>
+    </header>
+
+    <section class="games-hero">
+      <span class="eyebrow">CHOOSE YOUR BATTLE</span>
+      <h1>EXPLORE THE GAMES</h1>
+      <p>
+        Discover your favourite games, sharpen your skills
+        and prepare to compete against other players.
+      </p>
+    </section>
+
+    <div class="search-box">
+      <input
+        type="search"
+        id="gameSearch"
+        placeholder="Search games..."
+        aria-label="Search games"
+      >
+    </div>
+
+    <div class="category-list">
+      <button class="category-btn active" data-category="all">ALL GAMES</button>
+      <button class="category-btn" data-category="sports">SPORTS</button>
+      <button class="category-btn" data-category="battle">BATTLE</button>
+      <button class="category-btn" data-category="strategy">STRATEGY</button>
+      <button class="category-btn" data-category="casual">CASUAL</button>
+      <button class="category-btn" data-category="adventure">ADVENTURE</button>
+    </div>
+
+    <section class="games-grid" id="gamesGrid">
+
+      <article class="game-card" data-category="sports">
+        <div class="game-art">⚽</div>
+        <div class="game-info">
+          <span class="game-category">Sports</span>
+          <h3>Dream League Soccer 2026</h3>
+          <p>Football competition and skill-based matches.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="battle">
+        <div class="game-art">🎯</div>
+        <div class="game-info">
+          <span class="game-category">Battle</span>
+          <h3>Call of Duty Mobile</h3>
+          <p>Fast-paced multiplayer action.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="battle">
+        <div class="game-art">⚔️</div>
+        <div class="game-info">
+          <span class="game-category">Battle</span>
+          <h3>Mobile Legends</h3>
+          <p>Team-based competitive battles.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="sports">
+        <div class="game-art">🏟️</div>
+        <div class="game-info">
+          <span class="game-category">Sports</span>
+          <h3>eFootball 2026</h3>
+          <p>Competitive digital football.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="battle">
+        <div class="game-art">🪖</div>
+        <div class="game-info">
+          <span class="game-category">Battle</span>
+          <h3>PUBG Mobile</h3>
+          <p>Battle royale survival competition.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="battle">
+        <div class="game-art">🔥</div>
+        <div class="game-info">
+          <span class="game-category">Battle</span>
+          <h3>Free Fire</h3>
+          <p>Survival and battle royale action.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="adventure">
+        <div class="game-art">🚗</div>
+        <div class="game-info">
+          <span class="game-category">Adventure</span>
+          <h3>GTA V</h3>
+          <p>Open-world action and driving challenges.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="battle">
+        <div class="game-art">🪂</div>
+        <div class="game-info">
+          <span class="game-category">Battle</span>
+          <h3>Fortnite</h3>
+          <p>Building, survival and action.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="strategy">
+        <div class="game-art">🏰</div>
+        <div class="game-info">
+          <span class="game-category">Strategy</span>
+          <h3>Clash of Clans</h3>
+          <p>Build, defend and plan your attacks.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="strategy">
+        <div class="game-art">👑</div>
+        <div class="game-info">
+          <span class="game-category">Strategy</span>
+          <h3>Clash Royale</h3>
+          <p>Real-time strategic card battles.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="casual">
+        <div class="game-art">🚀</div>
+        <div class="game-info">
+          <span class="game-category">Casual</span>
+          <h3>Among Us</h3>
+          <p>Social deduction and teamwork.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="adventure">
+        <div class="game-art">⛏️</div>
+        <div class="game-info">
+          <span class="game-category">Adventure</span>
+          <h3>Minecraft</h3>
+          <p>Creative building and exploration.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="sports">
+        <div class="game-art">🏎️</div>
+        <div class="game-info">
+          <span class="game-category">Sports</span>
+          <h3>Asphalt Legends</h3>
+          <p>High-speed racing competition.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="casual">
+        <div class="game-art">🎱</div>
+        <div class="game-info">
+          <span class="game-category">Casual</span>
+          <h3>8 Ball Pool</h3>
+          <p>Precision and competitive pool matches.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="battle">
+        <div class="game-art">⭐</div>
+        <div class="game-info">
+          <span class="game-category">Battle</span>
+          <h3>Brawl Stars</h3>
+          <p>Quick multiplayer action battles.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="adventure">
+        <div class="game-art">✨</div>
+        <div class="game-info">
+          <span class="game-category">Adventure</span>
+          <h3>Genshin Impact</h3>
+          <p>Explore a large fantasy world.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="casual">
+        <div class="game-art">🏃</div>
+        <div class="game-info">
+          <span class="game-category">Casual</span>
+          <h3>Subway Surfers</h3>
+          <p>Endless running and score challenges.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="casual">
+        <div class="game-art">🍬</div>
+        <div class="game-info">
+          <span class="game-category">Casual</span>
+          <h3>Candy Crush Saga</h3>
+          <p>Puzzle solving and score challenges.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="casual">
+        <div class="game-art">🐒</div>
+        <div class="game-info">
+          <span class="game-category">Casual</span>
+          <h3>Temple Run 2</h3>
+          <p>Endless running and high-score competition.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="adventure">
+        <div class="game-art">🧱</div>
+        <div class="game-info">
+          <span class="game-category">Adventure</span>
+          <h3>Roblox</h3>
+          <p>Explore different user-created experiences.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+      <article class="game-card" data-category="battle">
+        <div class="game-art">🎮</div>
+        <div class="game-info">
+          <span class="game-category">Battle</span>
+          <h3>Valorant</h3>
+          <p>Tactical competitive shooter. Supported platform and mode to be confirmed.</p>
+          <span class="game-status">GAME LISTED</span>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="no-results" id="noResults">
+      No games found. Try another search.
+    </div>
+
+    <footer class="games-footer">
+      <p>IGEE ARENA — COMPETE WITH SKILL. WIN WITH HONOUR.</p>
+      <p>Game listings do not mean paid competition is currently available.</p>
+      <p>© <span id="currentYear"></span> IGEE ARENA</p>
+    </footer>
+
+  </main>
+
+  <script>
+    const searchInput = document.getElementById("gameSearch");
+    const gameCards = document.querySelectorAll(".game-card");
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const noResults = document.getElementById("noResults");
+
+    let activeCategory = "all";
+
+    function filterGames() {
+      const search = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      gameCards.forEach(function(card) {
+        const name = card.textContent.toLowerCase();
+        const category = card.dataset.category;
+
+        const matchesSearch = name.includes(search);
+        const matchesCategory =
+          activeCategory === "all" ||
+          category === activeCategory;
+
+        const visible = matchesSearch && matchesCategory;
+
+        card.style.display = visible ? "" : "none";
+
+        if (visible) visibleCount++;
+      });
+
+      noResults.style.display =
+        visibleCount === 0 ? "block" : "none";
+    }
+
+    searchInput.addEventListener("input", filterGames);
+
+    categoryButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        categoryButtons.forEach(function(item) {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        activeCategory = button.dataset.category;
+        filterGames();
+      });
+    });
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
