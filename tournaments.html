@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Tournaments | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 1150px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 22px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+    }
+
+    .back-link {
+      color: #c5b5ff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 38px 0 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(29px, 6vw, 43px);
+      margin: 12px 0;
+    }
+
+    .hero p {
+      color: #aaaac5;
+      line-height: 1.7;
+      font-size: 14px;
+      max-width: 650px;
+    }
+
+    .notice {
+      padding: 14px;
+      margin: 15px 0 25px;
+      background: #29213d;
+      border: 1px solid #614b91;
+      color: #dfd2ff;
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 19px;
+      margin: 28px 0 16px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      padding: 10px 15px;
+      border: 1px solid #39305f;
+      border-radius: 25px;
+      background: #111126;
+      color: #c9c4df;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: #7446d6;
+      border-color: #a78bfa;
+      color: white;
+    }
+
+    .tournament-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 17px;
+    }
+
+    .tournament-card {
+      overflow: hidden;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 13px;
+    }
+
+    .tournament-banner {
+      min-height: 150px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at center, #6541a8, transparent 70%),
+        linear-gradient(120deg, #1b1640, #101a39);
+    }
+
+    .banner-icon {
+      font-size: 43px;
+    }
+
+    .banner-label {
+      margin-top: 8px;
+      color: #ddd2ff;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .tournament-content {
+      padding: 18px;
+    }
+
+    .tournament-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .game-tag {
+      color: #c5a9ff;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .status {
+      padding: 6px 9px;
+      background: #25213d;
+      color: #c5b5ff;
+      border-radius: 5px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .tournament-content h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .description {
+      color: #aaaac5;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 15px 0;
+      margin-top: 13px;
+      border-top: 1px solid #292943;
+      border-bottom: 1px solid #292943;
+    }
+
+    .detail span {
+      display: block;
+      color: #9292ae;
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .detail strong {
+      font-size: 12px;
+    }
+
+    .tournament-btn {
+      display: block;
+      width: 100%;
+      margin-top: 15px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(120deg, #8b5cf6, #397bff);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .empty-state {
+      padding: 35px 15px;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 12px;
+      text-align: center;
+      color: #aaaac5;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .message {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      background: #29213d;
+      border: 1px solid #614b91;
+      border-radius: 8px;
+      color: #dfd2ff;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 35px 0 15px;
+      color: #77778f;
+      font-size: 11px;
+    }
+
+    @media(min-width: 700px) {
+      .tournament-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="header">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">IA</span>
+        <span>IGEE <strong>ARENA</strong></span>
+      </a>
+
+      <a href="dashboard.html" class="back-link">
+        MY DASHBOARD →
+      </a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">RISE ABOVE THE COMPETITION</span>
+      <h1>ARENA TOURNAMENTS</h1>
+      <p>
+        Discover competitive tournaments, follow the action
+        and work your way towards the top of the leaderboard.
+      </p>
+    </section>
+
+    <div class="notice">
+      <strong>Tournament centre:</strong>
+      Official tournaments will appear here when published
+      by IGEE ARENA administrators. Registration and prize
+      payments are not active in this preview.
+    </div>
+
+    <h2 class="section-title">EXPLORE TOURNAMENTS</h2>
+
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="upcoming">UPCOMING</button>
+      <button class="filter-btn" data-filter="open">REGISTRATION OPEN</button>
+      <button class="filter-btn" data-filter="live">LIVE</button>
+      <button class="filter-btn" data-filter="completed">COMPLETED</button>
+    </div>
+
+    <section class="tournament-grid" id="tournamentGrid">
+
+      <div class="empty-state" id="emptyState">
+        <div style="font-size:42px; margin-bottom:12px;">🏆</div>
+        <strong>No published tournaments yet</strong>
+        <p>
+          When the IGEE ARENA administration publishes
+          a tournament, its banner, game, schedule,
+          registration details and rules will appear here.
+        </p>
+      </div>
+
+    </section>
+
+    <div class="message" id="message" role="status"></div>
+
+    <footer class="footer">
+      <p>IGEE ARENA — COMPETE WITH SKILL. WIN WITH HONOUR.</p>
+      <p>© <span id="year"></span> IGEE ARENA</p>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const filterButtons =
+      document.querySelectorAll(".filter-btn");
+
+    filterButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        filterButtons.forEach(function(item) {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const message = document.getElementById("message");
+        const selected = button.dataset.filter;
+
+        message.style.display = "block";
+        message.textContent =
+          "Showing " + selected + " tournament listings. " +
+          "Tournament data will appear after backend integration.";
+      });
+    });
+  </script>
+</body>
+</html>
