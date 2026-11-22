@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Player Dashboard | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .dashboard {
+      max-width: 1250px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 0 25px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .dash-header .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .dash-header .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-link {
+      color: #c5b5ff;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .logout-btn {
+      background: #211d39;
+      border: 1px solid #514078;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .welcome {
+      padding: 30px 0 20px;
+    }
+
+    .welcome h1 {
+      font-size: clamp(24px, 5vw, 34px);
+      margin: 0 0 9px;
+    }
+
+    .welcome p {
+      color: #aaaac5;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .profile-panel {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 14px;
+      background: linear-gradient(120deg, #191532, #111126);
+      border: 1px solid #39305f;
+    }
+
+    .avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    .profile-info h2 {
+      margin: 0 0 7px;
+      font-size: 18px;
+    }
+
+    .profile-info p {
+      margin: 0;
+      color: #aaaac5;
+      font-size: 12px;
+    }
+
+    .player-id {
+      display: inline-block;
+      margin-top: 8px;
+      color: #c5b5ff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 30px 0 15px;
+    }
+
+    .wallet-card {
+      padding: 24px;
+      border-radius: 15px;
+      background: linear-gradient(120deg, #42217c, #202c69);
+      border: 1px solid #7953c9;
+    }
+
+    .wallet-label {
+      color: #ddd2ff;
+      font-size: 13px;
+    }
+
+    .wallet-balance {
+      font-size: clamp(27px, 6vw, 36px);
+      font-weight: 900;
+      margin: 12px 0 20px;
+    }
+
+    .wallet-note {
+      color: #ddd2ff;
+      font-size: 11px;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .wallet-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-btn {
+      display: inline-block;
+      padding: 12px 19px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .primary-btn {
+      background: white;
+      color: #28154d;
+    }
+
+    .secondary-btn {
+      border: 1px solid #d1c3ff;
+      color: white;
+    }
+
+    .stats-grid,
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .stat-card,
+    .feature-card,
+    .activity-card {
+      padding: 18px;
+      border-radius: 12px;
+      background: #111126;
+      border: 1px solid #292943;
+    }
+
+    .stat-card span {
+      display: block;
+      color: #aaaac5;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .stat-card strong {
+      font-size: 23px;
+    }
+
+    .feature-card {
+      min-height: 125px;
+      transition: border-color .2s;
+    }
+
+    .feature-card:hover {
+      border-color: #8b5cf6;
+    }
+
+    .feature-icon {
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3 {
+      font-size: 14px;
+      margin: 0 0 7px;
+    }
+
+    .feature-card p {
+      color: #aaaac5;
+      font-size: 11px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .activity-card {
+      color: #aaaac5;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .empty-activity {
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .dash-footer {
+      text-align: center;
+      color: #77778f;
+      font-size: 11px;
+      padding: 35px 0 20px;
+    }
+
+    @media(min-width: 700px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+      .feature-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media(max-width: 420px) {
+      .dashboard { padding: 15px; }
+      .header-link { display: none; }
+      .profile-panel { padding: 15px; }
+      .wallet-card { padding: 19px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="dashboard">
+
+    <header class="dash-header">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">IA</span>
+        <span>IGEE <strong>ARENA</strong></span>
+      </a>
+
+      <div class="header-actions">
+        <a href="#features" class="header-link">EXPLORE</a>
+        <button class="logout-btn" id="logoutBtn" type="button">
+          SIGN OUT
+        </button>
+      </div>
+    </header>
+
+    <section class="welcome">
+      <span class="eyebrow">PLAYER CONTROL CENTRE</span>
+      <h1>WELCOME TO THE ARENA</h1>
+      <p>Your competition journey starts here. Prepare, challenge and rise.</p>
+    </section>
+
+    <section class="profile-panel">
+      <div class="avatar">P</div>
+
+      <div class="profile-info">
+        <h2>Player Name</h2>
+        <p>Gaming Name: Your Gaming Name</p>
+        <span class="player-id">PLAYER ID: Pending account setup</span>
+      </div>
+    </section>
+
+    <h2 class="section-title">YOUR WALLET</h2>
+
+    <section class="wallet-card">
+      <div class="wallet-label">Available Balance</div>
+      <div class="wallet-balance">₦0.00</div>
+
+      <div class="wallet-actions">
+        <a href="#deposit" class="action-btn primary-btn">DEPOSIT</a>
+        <a href="#withdraw" class="action-btn secondary-btn">WITHDRAW</a>
+      </div>
+
+      <p class="wallet-note">
+        Your available balance will appear here after secure wallet
+        integration. No real-money transactions are active yet.
+      </p>
+    </section>
+
+    <h2 class="section-title">YOUR ACTIVITY</h2>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span>Total Matches</span>
+        <strong>0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Matches Won</span>
+        <strong>0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Matches Lost</span>
+        <strong>0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Win Rate</span>
+        <strong>0%</strong>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">ENTER THE ARENA</h2>
+
+      <div class="feature-grid">
+
+        <a href="#games" class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3>GAMES</h3>
+          <p>Explore available competitive games.</p>
+        </a>
+
+        <a href="#challenges" class="feature-card">
+          <div class="feature-icon">⚔️</div>
+          <h3>CHALLENGES</h3>
+          <p>Find opponents and compete.</p>
+        </a>
+
+        <a href="#tournaments" class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>TOURNAMENTS</h3>
+          <p>Discover upcoming competitions.</p>
+        </a>
+
+        <a href="#leaderboard" class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>LEADERBOARD</h3>
+          <p>Track rankings and player performance.</p>
+        </a>
+
+        <a href="#transactions" class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>TRANSACTIONS</h3>
+          <p>View wallet activity and payment history.</p>
+        </a>
+
+        <a href="#profile" class="feature-card">
+          <div class="feature-icon">👤</div>
+          <h3>MY PROFILE</h3>
+          <p>Manage your player information.</p>
+        </a>
+
+        <a href="#referrals" class="feature-card">
+          <div class="feature-icon">🎁</div>
+          <h3>REFERRALS</h3>
+          <p>Invite friends and track rewards.</p>
+        </a>
+
+        <a href="#notifications" class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>NOTIFICATIONS</h3>
+          <p>Stay updated with arena activity.</p>
+        </a>
+
+        <a href="#support" class="feature-card">
+          <div class="feature-icon">🛟</div>
+          <h3>HELP & SUPPORT</h3>
+          <p>Get assistance with your account.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <h2 class="section-title">RECENT ACTIVITY</h2>
+
+    <section class="activity-card">
+      <div class="empty-activity">
+        No activity yet. Your match and transaction history
+        will appear here when your account is connected.
+      </div>
+    </section>
+
+    <footer class="dash-footer">
+      <p>IGEE ARENA — COMPETE WITH SKILL. WIN WITH HONOUR.</p>
+      <p>© <span id="currentYear"></span> IGEE ARENA. All rights reserved.</p>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+    document.getElementById("logoutBtn").addEventListener(
+      "click",
+      function() {
+        window.location.href = "login.html";
+      }
+    );
+  </script>
+</body>
+</html>
