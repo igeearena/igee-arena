@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Leaderboard | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1050px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0 22px;
+      border-bottom: 1px solid #292943;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+    }
+
+    .back-link {
+      color: #c5b5ff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 38px 0 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(29px, 6vw, 43px);
+      margin: 12px 0;
+    }
+
+    .hero p {
+      color: #aaaac5;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .highlight {
+      color: #c5a9ff;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 10px;
+    }
+
+    .notice {
+      padding: 13px;
+      margin: 15px 0 25px;
+      background: #29213d;
+      border: 1px solid #614b91;
+      border-radius: 9px;
+      color: #dfd2ff;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 28px 0 15px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 18px;
+    }
+
+    .filter-btn {
+      padding: 10px 14px;
+      border: 1px solid #39305f;
+      border-radius: 25px;
+      background: #111126;
+      color: #c9c4df;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: #7446d6;
+      color: #fff;
+      border-color: #a78bfa;
+    }
+
+    .table-card {
+      overflow-x: auto;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 550px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 16px 13px;
+      border-bottom: 1px solid #292943;
+      font-size: 12px;
+    }
+
+    th {
+      color: #9292ae;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    td {
+      color: #e5e3f2;
+    }
+
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #302451;
+      color: #d9caff;
+      font-size: 12px;
+    }
+
+    .rank {
+      font-weight: 900;
+      color: #c5a9ff;
+    }
+
+    .points {
+      color: #b9a0ff;
+      font-weight: bold;
+    }
+
+    .empty {
+      padding: 35px 15px;
+      text-align: center;
+      color: #aaaac5;
+      line-height: 1.7;
+      font-size: 13px;
+    }
+
+    .empty-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      padding: 35px 0 15px;
+      text-align: center;
+      color: #77778f;
+      font-size: 11px;
+    }
+
+    @media(max-width: 480px) {
+      .page { padding: 15px; }
+      .hero { padding-top: 30px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="header">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">IA</span>
+        <span>IGEE <strong>ARENA</strong></span>
+      </a>
+
+      <a href="dashboard.html" class="back-link">
+        MY DASHBOARD →
+      </a>
+    </header>
+
+    <section class="hero">
+      <div class="highlight">THE BEST OF THE BEST</div>
+      <h1>PLAYER LEADERBOARD</h1>
+      <p>
+        Every victory counts. Compete, earn points,
+        improve your ranking and rise to the top
+        of IGEE ARENA.
+      </p>
+    </section>
+
+    <div class="notice">
+      <strong>Leaderboard preview:</strong>
+      Official player rankings will appear when match
+      results and player statistics are connected to
+      the IGEE ARENA backend.
+    </div>
+
+    <h2 class="section-title">TOP PLAYERS</h2>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="overall">
+        OVERALL
+      </button>
+
+      <button class="filter-btn" data-filter="weekly">
+        WEEKLY
+      </button>
+
+      <button class="filter-btn" data-filter="monthly">
+        MONTHLY
+      </button>
+    </div>
+
+    <section class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>RANK</th>
+            <th>PLAYER</th>
+            <th>PLAYER ID</th>
+            <th>WINS</th>
+            <th>POINTS</th>
+          </tr>
+        </thead>
+
+        <tbody id="leaderboardBody">
+          <tr>
+            <td colspan="5">
+              <div class="empty">
+                <div class="empty-icon">🏆</div>
+                <strong>No rankings available yet</strong>
+                <p>
+                  Player rankings will appear here after
+                  verified match results are recorded.
+                </p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="footer">
+      <p>IGEE ARENA — COMPETE WITH SKILL. WIN WITH HONOUR.</p>
+      <p>© <span id="year"></span> IGEE ARENA</p>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const filterButtons =
+      document.querySelectorAll(".filter-btn");
+
+    filterButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        filterButtons.forEach(function(item) {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const selected = button.dataset.filter;
+
+        const empty = document.querySelector(".empty");
+
+        if (empty) {
+          empty.querySelector("p").textContent =
+            "No " + selected +
+            " rankings are available yet. Rankings will appear after verified match results are recorded.";
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
