@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Report a Player | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .report-page {
+      width: min(750px, 92%);
+      margin: 35px auto;
+    }
+    .report-card {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid rgba(150,110,255,.25);
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+    }
+    .report-form {
+      display: grid;
+      gap: 16px;
+    }
+    .report-form label {
+      display: grid;
+      gap: 8px;
+      font-size: 14px;
+    }
+    .report-form input,
+    .report-form select,
+    .report-form textarea {
+      width: 100%;
+      padding: 13px;
+      color: inherit;
+      background: #111126;
+      border: 1px solid rgba(150,110,255,.3);
+      border-radius: 9px;
+      font: inherit;
+    }
+    .report-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    .report-form button {
+      padding: 14px;
+      border: 0;
+      border-radius: 9px;
+      background: #7138df;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .evidence-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(90px,1fr));
+      gap: 10px;
+    }
+    .evidence-preview img {
+      width: 100%;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 9px;
+      border: 1px solid rgba(150,110,255,.3);
+    }
+    .report-note {
+      font-size: 12px;
+      opacity: .65;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="report-page">
+    <a href="dashboard.html">← Back to Dashboard</a>
+
+    <header style="margin-top:25px">
+      <p style="color:#a78bfa;font-weight:bold">PLAYER SAFETY</p>
+      <h1>Report a Player</h1>
+      <p>Help us maintain fair competition and respect across IGEE ARENA.</p>
+    </header>
+
+    <section class="report-card">
+      <form class="report-form" id="reportForm">
+
+        <label>
+          Player ID of the person you are reporting
+          <input
+            type="text"
+            id="reportedPlayerId"
+            inputmode="numeric"
+            pattern="[0-9]{6}"
+            maxlength="6"
+            placeholder="Enter six-digit Player ID"
+            required
+          >
+        </label>
+
+        <label>
+          Reason for report
+          <select id="reportCategory" required>
+            <option value="">Select a reason</option>
+            <option>Verbal abuse or harassment</option>
+            <option>Threats or intimidation</option>
+            <option>Cheating or unfair play</option>
+            <option>Match or result manipulation</option>
+            <option>Payment fraud</option>
+            <option>Impersonation</option>
+            <option>Discrimination</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label>
+          Explain what happened
+          <textarea
+            id="reportDescription"
+            maxlength="3000"
+            placeholder="Describe the incident, including relevant match details..."
+            required
+          ></textarea>
+        </label>
+
+        <label>
+          Screenshot evidence (maximum 10 images)
+          <input
+            type="file"
+            id="reportEvidence"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+          >
+        </label>
+
+        <p class="report-note" id="evidenceCount">
+          No screenshots selected.
+        </p>
+
+        <div class="evidence-preview" id="evidencePreview"></div>
+
+        <button type="submit">SUBMIT PLAYER REPORT</button>
+
+        <p class="report-note">
+          Only submit truthful reports. Do not upload passwords, OTPs,
+          bank details or unrelated private information. Evidence and
+          reports will be securely stored after backend integration.
+        </p>
+
+        <p id="reportStatus" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const evidenceInput = document.getElementById("reportEvidence");
+    const evidencePreview = document.getElementById("evidencePreview");
+    const evidenceCount = document.getElementById("evidenceCount");
+    const reportForm = document.getElementById("reportForm");
+    const reportStatus = document.getElementById("reportStatus");
+
+    let selectedEvidence = [];
+
+    evidenceInput.addEventListener("change", () => {
+      const files = Array.from(evidenceInput.files);
+
+      if (files.length > 10) {
+        evidenceInput.value = "";
+        selectedEvidence = [];
+        evidencePreview.innerHTML = "";
+        evidenceCount.textContent = "You can upload a maximum of 10 images.";
+        return;
+      }
+
+      if (files.some(file =>
+        !["image/jpeg", "image/png", "image/webp"].includes(file.type)
+      )) {
+        evidenceInput.value = "";
+        selectedEvidence = [];
+        evidencePreview.innerHTML = "";
+        evidenceCount.textContent = "Use JPG, PNG or WEBP images only.";
+        return;
+      }
+
+      selectedEvidence = files;
+      evidencePreview.innerHTML = "";
+
+      evidenceCount.textContent =
+        files.length + (files.length === 1
+          ? " screenshot selected."
+          : " screenshots selected.");
+
+      files.forEach(file => {
+        const image = document.createElement("img");
+        const reader = new FileReader();
+
+        reader.onload = event => {
+          image.src = event.target.result;
+        };
+
+        reader.readAsDataURL(file);
+        evidencePreview.appendChild(image);
+      });
+    });
+
+    reportForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      reportStatus.textContent =
+        "Your report form is ready. Secure report submission will be enabled during backend integration.";
+    });
+  </script>
+</body>
+</html>
