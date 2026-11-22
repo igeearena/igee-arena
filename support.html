@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Support | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .support-page {
+      width: min(850px, 92%);
+      margin: 35px auto;
+    }
+    .support-card {
+      padding: 22px;
+      margin: 18px 0;
+      border: 1px solid rgba(150,110,255,.25);
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+    }
+    .support-form {
+      display: grid;
+      gap: 15px;
+    }
+    .support-form label {
+      display: grid;
+      gap: 7px;
+      font-size: 14px;
+    }
+    .support-form input,
+    .support-form select,
+    .support-form textarea {
+      width: 100%;
+      padding: 13px;
+      color: inherit;
+      background: #111126;
+      border: 1px solid rgba(150,110,255,.3);
+      border-radius: 9px;
+      font: inherit;
+    }
+    .support-form textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    .support-form button {
+      padding: 13px;
+      border: 0;
+      border-radius: 9px;
+      background: #7138df;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .support-note {
+      font-size: 12px;
+      opacity: .65;
+      line-height: 1.6;
+    }
+    .support-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 12px;
+    }
+    .support-option {
+      padding: 16px;
+      border: 1px solid rgba(150,110,255,.2);
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="support-page">
+    <a href="dashboard.html">← Back to Dashboard</a>
+
+    <header style="margin-top:25px">
+      <p style="color:#a78bfa;font-weight:bold">WE'RE HERE TO HELP</p>
+      <h1>IGEE ARENA Support</h1>
+      <p>Tell us what you need help with. Our support team will assist you.</p>
+    </header>
+
+    <section class="support-card">
+      <h2>What can we help you with?</h2>
+      <div class="support-options">
+        <div class="support-option">
+          <h3>💳 Wallet & Payments</h3>
+          <p>Deposits, withdrawals and transactions.</p>
+        </div>
+        <div class="support-option">
+          <h3>🎮 Matches</h3>
+          <p>Challenges, match results and disputes.</p>
+        </div>
+        <div class="support-option">
+          <h3>👤 Account</h3>
+          <p>Registration, login and profile problems.</p>
+        </div>
+        <div class="support-option">
+          <h3>🏆 Tournaments</h3>
+          <p>Registration, brackets and tournament issues.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-card">
+      <h2>Submit a support request</h2>
+
+      <form class="support-form" id="supportForm">
+        <label>
+          Your name
+          <input type="text" id="supportName" required maxlength="100"
+            placeholder="Enter your name">
+        </label>
+
+        <label>
+          Email address
+          <input type="email" id="supportEmail" required maxlength="254"
+            placeholder="Enter your email">
+        </label>
+
+        <label>
+          Support category
+          <select id="supportCategory" required>
+            <option value="">Select a category</option>
+            <option>Wallet and payments</option>
+            <option>Matches and challenges</option>
+            <option>Account and login</option>
+            <option>Tournaments</option>
+            <option>Report a player</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label>
+          Subject
+          <input type="text" id="supportSubject" required maxlength="120"
+            placeholder="Briefly describe your issue">
+        </label>
+
+        <label>
+          Explain the problem
+          <textarea id="supportMessage" required maxlength="3000"
+            placeholder="Give us the details of your issue..."></textarea>
+        </label>
+
+        <button type="submit">SUBMIT SUPPORT REQUEST</button>
+
+        <p class="support-note">
+          Please do not include your password, bank PIN, OTP or payment
+          card security details. Support requests will be securely
+          submitted after backend integration.
+        </p>
+      </form>
+
+      <p id="supportStatus" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("supportForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      document.getElementById("supportStatus").textContent =
+        "The support form is ready. Secure request submission will be enabled during backend integration.";
+
+      this.reset();
+    });
+  </script>
+</body>
+</html>
