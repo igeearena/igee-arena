@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Register | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .register-page {
+      min-height: 100vh;
+      padding: 55px 20px 80px;
+      background:
+        radial-gradient(ellipse at top, #30205d 0%, transparent 48%),
+        #080817;
+    }
+
+    .register-container {
+      width: 100%;
+      max-width: 620px;
+      margin: auto;
+    }
+
+    .register-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .register-heading h1 {
+      color: #a78bfa;
+      font-size: clamp(27px, 6vw, 43px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .register-heading h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .register-heading p {
+      color: #b5b5d0;
+      font-size: 14px;
+    }
+
+    .register-card {
+      background: #111126;
+      border: 1px solid #35305c;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 15px 60px #0008;
+    }
+
+    .register-card h3 {
+      font-size: 21px;
+      margin-bottom: 6px;
+    }
+
+    .form-intro {
+      color: #a5a5c2;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .avatar-area {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .avatar-preview {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      border: 2px solid #8b5cf6;
+      background: #20203c;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #b9a5ff;
+      font-size: 12px;
+    }
+
+    .avatar-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-label {
+      color: #b69aff;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .upload-label input {
+      display: block;
+      width: 100%;
+      margin-top: 9px;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      min-height: 49px;
+      padding: 13px 14px;
+      border-radius: 8px;
+      border: 1px solid #353553;
+      background: #09091a;
+      color: white;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #9b75ff;
+      box-shadow: 0 0 0 2px #8b5cf633;
+    }
+
+    .form-group input::placeholder {
+      color: #77778f;
+    }
+
+    .phone-field {
+      display: flex;
+      gap: 10px;
+    }
+
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 70px;
+      border: 1px solid #353553;
+      border-radius: 8px;
+      background: #20203c;
+      color: white;
+      font-weight: bold;
+    }
+
+    .register-submit {
+      width: 100%;
+      min-height: 52px;
+      border: 0;
+      border-radius: 9px;
+      background: linear-gradient(120deg, #8b5cf6, #397bff);
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .terms-note {
+      color: #9292ae;
+      font-size: 11px;
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .login-prompt {
+      text-align: center;
+      margin-top: 23px;
+      color: #aaaac5;
+      font-size: 13px;
+    }
+
+    .login-prompt a {
+      color: #b69aff;
+      font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+      .register-card {
+        padding: 22px 17px;
+      }
+
+      .register-page {
+        padding: 38px 14px 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="register-page">
+    <div class="register-container">
+
+      <div class="register-heading">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">IA</span>
+          <span>IGEE <strong>ARENA</strong></span>
+        </a>
+
+        <div style="margin-top:35px">
+          <h1>REGISTER. COMPETE. RISE. WIN.</h1>
+          <h2>Your Skill Can Take You to the Top.</h2>
+          <p>
+            Join IGEE ARENA, challenge the competition
+            and compete for real cash prizes.
+          </p>
+        </div>
+      </div>
+
+      <section class="register-card">
+        <h3>Create Your Account</h3>
+        <p class="form-intro">
+          Enter your details to join the arena.
+        </p>
+
+        <form id="registrationForm">
+
+          <div class="avatar-area">
+            <div class="avatar-preview" id="avatarPreview">
+              Profile Photo
+            </div>
+
+            <label class="upload-label">
+              UPLOAD PROFILE PICTURE
+              <input
+                type="file"
+                id="profilePicture"
+                accept="image/jpeg,image/png,image/webp"
+              >
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="full_name"
+              placeholder="Enter your real full name"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="gameName">Gaming Name</label>
+            <input
+              type="text"
+              id="gameName"
+              name="nickname"
+              placeholder="Choose your public gaming name"
+              autocomplete="nickname"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Nigerian Phone Number</label>
+            <div class="phone-field">
+              <span class="phone-prefix">+234</span>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="8012345678"
+                inputmode="numeric"
+                autocomplete="tel-national"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email address"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Create Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Create a strong password"
+              minlength="8"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirm_password"
+              placeholder="Enter your password again"
+              minlength="8"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <button type="submit" class="register-submit">
+            REGISTER NOW
+          </button>
+
+          <p class="terms-note">
+            By registering, you agree to follow IGEE ARENA's
+            rules, competition standards and terms of service.
+          </p>
+        </form>
+
+        <p class="login-prompt">
+          Already have an account?
+          <a href="login.html">SIGN IN</a>
+        </p>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
