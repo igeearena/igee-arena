@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +5,382 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080817">
   <meta name="description" content="IGEE ARENA - Compete, challenge and rise to the top.">
-  <title>IGEE ARENA | The Ultimate Gaming Arena</title>
+  <title>IGEE ARENA | Your Skill. Your Glory.</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --bg: #080817;
+      --panel: #111126;
+      --purple: #9b5cff;
+      --blue: #397cff;
+      --white: #f7f5ff;
+      --muted: #aaa8c3;
+      --border: rgba(157, 105, 255, .25);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      min-height: 76px;
+      padding: 12px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: rgba(8, 8, 23, .96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 22px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .brand strong { color: var(--purple); }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      box-shadow: 0 0 25px rgba(135, 75, 255, .4);
+      font-weight: 900;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      color: var(--muted);
+    }
+
+    .main-nav a:hover { color: white; }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 13px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+      transition: .2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(110deg, var(--purple), var(--blue));
+      color: white;
+      box-shadow: 0 8px 25px rgba(105, 67, 255, .22);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--purple);
+      color: white;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .hero {
+      min-height: 690px;
+      padding: 100px 6% 80px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      isolation: isolate;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(5,5,19,.94), rgba(9,7,27,.55), rgba(5,5,19,.88)),
+        url("images/igee-arena-hero.jpg") center/cover no-repeat,
+        radial-gradient(ellipse at 50% 45%, #34205f, #11102c 55%, #080817 85%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(132,64,255,.28), transparent 55%),
+        linear-gradient(0deg, var(--bg), transparent 30%, transparent 75%, var(--bg));
+    }
+
+    .hero-content {
+      max-width: 850px;
+      position: relative;
+    }
+
+    .eyebrow {
+      color: #bd91ff;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    .hero h1 {
+      margin: 25px 0;
+      font-size: clamp(43px, 8vw, 86px);
+      line-height: 1.03;
+      font-weight: 950;
+      letter-spacing: -3px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(100deg, #b36aff, #557dff);
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto 30px;
+      color: #d0cce5;
+      font-size: clamp(16px, 2.5vw, 21px);
+      line-height: 1.7;
+    }
+
+    .hero .btn { min-height: 58px; padding: 0 30px; }
+
+    .tournament-section {
+      max-width: 1200px;
+      margin: -35px auto 70px;
+      padding: 35px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      background: linear-gradient(110deg, #111126, #17112e);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 15px 50px rgba(0,0,0,.35);
+    }
+
+    .tournament-section h2 {
+      margin: 12px 0;
+      font-size: clamp(23px, 4vw, 34px);
+    }
+
+    .tournament-section p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .tournament-icon {
+      min-width: 95px;
+      height: 95px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      font-size: 45px;
+      color: #c28cff;
+      background: rgba(147, 81, 255, .13);
+      border: 1px solid var(--border);
+    }
+
+    .games-section {
+      max-width: 1250px;
+      margin: auto;
+      padding: 25px 25px 75px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin: 12px 0;
+    }
+
+    .section-heading p { color: var(--muted); }
+
+    .game-category { margin-bottom: 38px; }
+
+    .game-category h3 {
+      color: #c59aff;
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-bottom: 17px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .game-card {
+      min-height: 155px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px;
+      border-radius: 17px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 80% 15%, rgba(135,73,255,.22), transparent 50%),
+        linear-gradient(145deg, #1a1938, #101020);
+      transition: .25s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      border-color: #a66aff;
+      box-shadow: 0 10px 30px rgba(126,68,255,.18);
+    }
+
+    .game-number {
+      position: absolute;
+      top: 13px;
+      left: 14px;
+      color: #c59aff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .game-card h4 {
+      margin: 25px 0 7px;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    .game-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .games-more {
+      display: flex;
+      justify-content: center;
+      margin-top: 35px;
+    }
+
+    .about-section {
+      max-width: 1200px;
+      margin: 0 auto 70px;
+      padding: 55px 6%;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 80% 30%, rgba(111,57,208,.2), transparent 45%),
+        linear-gradient(130deg, #121228, #0b0b1c);
+    }
+
+    .about-section h2 {
+      font-size: clamp(26px, 5vw, 42px);
+      margin: 15px 0;
+    }
+
+    .about-section p {
+      max-width: 760px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .site-footer {
+      padding: 35px 5%;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: #060611;
+    }
+
+    .site-footer p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 800px) {
+      .site-header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 12px 4%;
+      }
+
+      .brand { font-size: 19px; }
+      .brand-mark { width: 43px; height: 43px; }
+
+      .main-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 22px;
+        padding: 10px 0 3px;
+        font-size: 14px;
+      }
+
+      .auth-buttons { gap: 7px; }
+      .btn { padding: 0 13px; min-height: 43px; font-size: 11px; }
+
+      .hero {
+        min-height: 620px;
+        padding: 85px 6% 70px;
+      }
+
+      .hero h1 { letter-spacing: -2px; }
+
+      .tournament-section {
+        margin: -25px 15px 45px;
+        padding: 25px;
+      }
+
+      .games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .game-card { min-height: 145px; }
+    }
+
+    @media (max-width: 390px) {
+      .brand { font-size: 16px; }
+      .auth-buttons .btn { padding: 0 9px; font-size: 10px; }
+      .main-nav { gap: 14px; font-size: 12px; }
+      .tournament-icon { min-width: 65px; height: 65px; font-size: 30px; }
+    }
+  </style>
 </head>
+
 <body>
 
   <header class="site-header">
@@ -34,24 +406,27 @@
     <section class="hero" id="home">
       <div class="hero-content">
         <span class="eyebrow">WELCOME TO THE ARENA</span>
+
         <h1>YOUR SKILL.<br><span>YOUR GLORY.</span></h1>
+
         <p>
           Challenge other players, compete in your favourite games
           and prove that you belong among the best.
         </p>
+
         <a href="#games" class="btn btn-primary">EXPLORE GAMES</a>
-      </div>
-      <div class="hero-art">
-        <div class="arena-symbol">IA</div>
-        <span>COMPETE • CONQUER • RISE</span>
       </div>
     </section>
 
     <section class="tournament-section" id="tournaments">
-      <span class="eyebrow">THE COMPETITION STARTS HERE</span>
-      <h2>THE ARENA IS WAITING</h2>
-      <p>Discover upcoming IGEE ARENA tournaments and competitions.</p>
-      <p class="notice">Tournament announcements will appear here.</p>
+      <div class="tournament-icon">🏆</div>
+
+      <div>
+        <span class="eyebrow">THE COMPETITION STARTS HERE</span>
+        <h2>THE ARENA IS WAITING</h2>
+        <p>Discover upcoming IGEE ARENA tournaments and competitions.</p>
+        <p class="notice">Tournament announcements will appear here.</p>
+      </div>
     </section>
 
     <section class="games-section" id="games">
@@ -61,28 +436,53 @@
         <p>Find your game. Challenge your rivals. Rise through the ranks.</p>
       </div>
 
-      <div class="games-grid">
-        <article class="game-card"><span>01</span><h3>Dream League Soccer 2026</h3></article>
-        <article class="game-card"><span>02</span><h3>Call of Duty Mobile</h3></article>
-        <article class="game-card"><span>03</span><h3>Mobile Legends</h3></article>
-        <article class="game-card"><span>04</span><h3>eFootball 2026</h3></article>
-        <article class="game-card"><span>05</span><h3>PUBG Mobile</h3></article>
-        <article class="game-card"><span>06</span><h3>Free Fire</h3></article>
-        <article class="game-card"><span>07</span><h3>Grand Theft Auto V</h3></article>
-        <article class="game-card"><span>08</span><h3>Fortnite</h3></article>
-        <article class="game-card"><span>09</span><h3>Clash of Clans</h3></article>
-        <article class="game-card"><span>10</span><h3>Clash Royale</h3></article>
-        <article class="game-card"><span>11</span><h3>Among Us</h3></article>
-        <article class="game-card"><span>12</span><h3>Minecraft</h3></article>
-        <article class="game-card"><span>13</span><h3>Asphalt Legends</h3></article>
-        <article class="game-card"><span>14</span><h3>8 Ball Pool</h3></article>
-        <article class="game-card"><span>15</span><h3>Brawl Stars</h3></article>
-        <article class="game-card"><span>16</span><h3>Genshin Impact</h3></article>
-        <article class="game-card"><span>17</span><h3>Subway Surfers</h3></article>
-        <article class="game-card"><span>18</span><h3>Candy Crush Saga</h3></article>
-        <article class="game-card"><span>19</span><h3>Temple Run 2</h3></article>
-        <article class="game-card"><span>20</span><h3>Roblox</h3></article>
-        <article class="game-card"><span>21</span><h3>Valorant</h3></article>
+      <div class="game-category">
+        <h3>COMBAT & BATTLE GAMES</h3>
+        <div class="games-grid">
+          <article class="game-card"><span class="game-number">01</span><h4>Call of Duty: Mobile</h4><p>Private-room duels and sniper matches.</p></article>
+          <article class="game-card"><span class="game-number">02</span><h4>PUBG Mobile</h4><p>Custom-room battles and 1v1 modes.</p></article>
+          <article class="game-card"><span class="game-number">03</span><h4>Blood Strike</h4><p>Fast tactical shooter battles.</p></article>
+          <article class="game-card"><span class="game-number">04</span><h4>Free Fire</h4><p>Clash Squad and Lone Wolf duels.</p></article>
+          <article class="game-card"><span class="game-number">05</span><h4>Arena Breakout</h4><p>Tactical raids and custom modes.</p></article>
+          <article class="game-card"><span class="game-number">06</span><h4>Rocket League / Sideswipe</h4><p>High-speed 1v1 car soccer.</p></article>
+          <article class="game-card"><span class="game-number">07</span><h4>Mortal Kombat 1</h4><p>Competitive fighting duels.</p></article>
+        </div>
+      </div>
+
+      <div class="game-category">
+        <h3>SPORTS GAMES</h3>
+        <div class="games-grid">
+          <article class="game-card"><span class="game-number">08</span><h4>Dream League Soccer</h4><p>DLS 2026/2027 friend matches.</p></article>
+          <article class="game-card"><span class="game-number">09</span><h4>eFootball</h4><p>Custom Friend Match rooms.</p></article>
+          <article class="game-card"><span class="game-number">10</span><h4>8-Ball Pool</h4><p>Head-to-head pool matches.</p></article>
+        </div>
+      </div>
+
+      <div class="game-category">
+        <h3>BOARD & CARD CLASSICS</h3>
+        <div class="games-grid">
+          <article class="game-card"><span class="game-number">11</span><h4>Chess</h4><p>Strategic 1v1 board battles.</p></article>
+          <article class="game-card"><span class="game-number">12</span><h4>Ludo King</h4><p>Race tokens and challenge rivals.</p></article>
+          <article class="game-card"><span class="game-number">13</span><h4>UNO!</h4><p>Fast competitive card matches.</p></article>
+          <article class="game-card"><span class="game-number">14</span><h4>Scrabble GO</h4><p>Head-to-head word battles.</p></article>
+          <article class="game-card"><span class="game-number">15</span><h4>Checkers</h4><p>Classic strategy and captures.</p></article>
+          <article class="game-card"><span class="game-number">16</span><h4>Mancala</h4><p>Strategic stone-sowing duels.</p></article>
+          <article class="game-card"><span class="game-number">17</span><h4>Gin Rummy</h4><p>Sets, runs and card strategy.</p></article>
+        </div>
+      </div>
+
+      <div class="game-category">
+        <h3>QUICK & CASUAL DUELS</h3>
+        <div class="games-grid">
+          <article class="game-card"><span class="game-number">18</span><h4>Sea Battle 2</h4><p>Hide ships and find your rival.</p></article>
+          <article class="game-card"><span class="game-number">19</span><h4>Four in a Row</h4><p>Connect four before your rival.</p></article>
+          <article class="game-card"><span class="game-number">20</span><h4>Dots and Boxes</h4><p>Claim boxes and chain turns.</p></article>
+          <article class="game-card"><span class="game-number">21</span><h4>Stick Fight: The Game</h4><p>Fast arena duels and hazards.</p></article>
+        </div>
+      </div>
+
+      <div class="games-more">
+        <a href="games.html" class="btn btn-outline">VIEW ALL GAMES</a>
       </div>
     </section>
 
@@ -92,7 +492,8 @@
       <p>
         IGEE ARENA is being built to bring competitive gamers
         together in one community where skill, fair play and
-        respect matter.
+        respect matter. Compete with determination, respect
+        your opponents and rise through the ranks.
       </p>
     </section>
   </main>
@@ -105,4 +506,4 @@
 
   <script src="js/app.js"></script>
 </body>
-</html>
+        </html>
