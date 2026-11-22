@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Match Room | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 950px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 22px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+    }
+
+    .back-link {
+      color: #c5b5ff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 32px 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    .hero p {
+      color: #aaaac5;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .notice {
+      padding: 13px;
+      margin: 17px 0;
+      background: #29213d;
+      border: 1px solid #614b91;
+      border-radius: 9px;
+      color: #dfd2ff;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      margin: 27px 0 15px;
+      font-size: 18px;
+    }
+
+    .panel {
+      padding: 18px;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .match-status {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 5px;
+      background: #302451;
+      color: #d4c5ff;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .match-id {
+      margin-top: 13px;
+      color: #9292ae;
+      font-size: 11px;
+    }
+
+    .players {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .player {
+      padding: 17px 10px;
+      text-align: center;
+      background: #080817;
+      border: 1px solid #39305f;
+      border-radius: 10px;
+    }
+
+    .avatar {
+      width: 55px;
+      height: 55px;
+      margin: auto auto 12px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #302451;
+      font-size: 23px;
+    }
+
+    .player strong {
+      display: block;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .player span {
+      display: block;
+      margin-top: 7px;
+      color: #9292ae;
+      font-size: 10px;
+    }
+
+    .versus {
+      color: #a78bfa;
+      font-size: 17px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .details {
+      margin-top: 20px;
+      border-top: 1px solid #292943;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid #292943;
+      font-size: 12px;
+    }
+
+    .detail-row span {
+      color: #9292ae;
+    }
+
+    .detail-row strong {
+      text-align: right;
+    }
+
+    .timer {
+      padding: 20px;
+      text-align: center;
+      background: #21183a;
+      border: 1px solid #6546a4;
+      border-radius: 10px;
+    }
+
+    .timer span {
+      display: block;
+      color: #c5b5ff;
+      font-size: 11px;
+    }
+
+    .timer strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 27px;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #aaaac5;
+      font-size: 12px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 13px;
+      background: #080817;
+      border: 1px solid #39305f;
+      border-radius: 8px;
+      color: white;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .disabled-btn {
+      width: 100%;
+      padding: 13px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 8px;
+      background: #39304f;
+      color: #c5b5d9;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: not-allowed;
+    }
+
+    .empty {
+      padding: 24px 12px;
+      text-align: center;
+      color: #aaaac5;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .empty-icon {
+      font-size: 37px;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      padding: 35px 0 15px;
+      color: #77778f;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    @media(min-width: 650px) {
+      .players {
+        grid-template-columns: 1fr 70px 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="header">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">IA</span>
+        <span>IGEE <strong>ARENA</strong></span>
+      </a>
+
+      <a href="dashboard.html" class="back-link">
+        MY DASHBOARD →
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>MATCH ROOM</h1>
+      <p>
+        Your competition starts here. Meet your opponent,
+        review match details and prepare to compete.
+      </p>
+    </section>
+
+    <div class="notice">
+      <strong>Match room preview:</strong>
+      Live matches are not yet connected. Match information,
+      player readiness, results and disputes will become
+      functional after secure backend integration.
+    </div>
+
+    <h2 class="section-title">ACTIVE MATCH</h2>
+
+    <section class="panel">
+      <div class="empty">
+        <div class="empty-icon">🎮</div>
+        <strong>No active match available</strong>
+        <p>
+          When you accept a challenge and a match is
+          created, its details will appear here.
+        </p>
+        <a href="challenges.html"
+           style="color:#c5a9ff;font-weight:bold;">
+          VIEW CHALLENGES →
+        </a>
+      </div>
+    </section>
+
+    <h2 class="section-title">MATCH PREPARATION</h2>
+
+    <section class="panel">
+      <span class="match-status">WAITING FOR MATCH DATA</span>
+
+      <div class="match-id">
+        Match ID: Not assigned
+      </div>
+
+      <div class="players">
+        <div class="player">
+          <div class="avatar">👤</div>
+          <strong>Your Gaming Name</strong>
+          <span>Your Player ID</span>
+        </div>
+
+        <div class="versus">VS</div>
+
+        <div class="player">
+          <div class="avatar">🎮</div>
+          <strong>Opponent</strong>
+          <span>Opponent Player ID</span>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="detail-row">
+          <span>Game</span>
+          <strong>Not assigned</strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Game Mode</span>
+          <strong>Not assigned</strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Match Status</span>
+          <strong>Waiting</strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Entry Amount</span>
+          <strong>₦0.00</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="timer">
+      <span>MATCH COUNTDOWN</span>
+      <strong>-- : -- : --</strong>
+    </section>
+
+    <h2 class="section-title">READY CONFIRMATION</h2>
+
+    <section class="panel">
+      <p style="color:#aaaac5;font-size:12px;line-height:1.7;">
+        Both players will need to confirm readiness
+        before an authorized match countdown begins.
+      </p>
+
+      <button class="disabled-btn" type="button" disabled>
+        READY — UNAVAILABLE
+      </button>
+    </section>
+
+    <h2 class="section-title">SUBMIT MATCH RESULT</h2>
+
+    <section class="panel">
+      <div class="field">
+        <label for="matchResult">Your Match Result</label>
+        <select id="matchResult" disabled>
+          <option value="">Select result</option>
+          <option value="win">I Won</option>
+          <option value="loss">I Lost</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="resultDetails">Match Details</label>
+        <textarea
+          id="resultDetails"
+          placeholder="Enter additional match information"
+          disabled
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="resultEvidence">Upload Screenshot Evidence</label>
+        <input
+          id="resultEvidence"
+          type="file"
+          accept="image/*"
+          disabled
+        >
+      </div>
+
+      <button class="disabled-btn" type="button" disabled>
+        SUBMIT RESULT — UNAVAILABLE
+      </button>
+    </section>
+
+    <h2 class="section-title">REPORT A MATCH DISPUTE</h2>
+
+    <section class="panel">
+      <div class="field">
+        <label for="disputeReason">Describe the problem</label>
+        <textarea
+          id="disputeReason"
+          placeholder="Explain what happened during the match..."
+          disabled
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="disputeEvidence">Upload Supporting Evidence</label>
+        <input
+          id="disputeEvidence"
+          type="file"
+          accept="image/*"
+          multiple
+          disabled
+        >
+      </div>
+
+      <button class="disabled-btn" type="button" disabled>
+        SUBMIT DISPUTE — UNAVAILABLE
+      </button>
+
+      <p style="color:#9292ae;font-size:11px;line-height:1.7;">
+        Disputes will be reviewed by authorized IGEE ARENA
+        moderators using submitted evidence and match records.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>IGEE ARENA — COMPETE WITH SKILL. WIN WITH HONOUR.</p>
+      <p>© <span id="year"></span> IGEE ARENA</p>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
