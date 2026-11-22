@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Account Settings | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .settings-page {
+      width: min(850px, 92%);
+      margin: 35px auto;
+    }
+    .settings-card {
+      margin: 20px 0;
+      padding: 22px;
+      border: 1px solid rgba(150,110,255,.23);
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+    }
+    .settings-card h2 {
+      margin-top: 0;
+      color: #b69aff;
+    }
+    .settings-form {
+      display: grid;
+      gap: 14px;
+    }
+    .settings-form label {
+      display: grid;
+      gap: 7px;
+      font-size: 14px;
+    }
+    .settings-form input {
+      width: 100%;
+      padding: 13px;
+      color: inherit;
+      background: #111126;
+      border: 1px solid rgba(150,110,255,.3);
+      border-radius: 9px;
+      font: inherit;
+    }
+    .settings-button {
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 9px;
+      background: #7138df;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .danger-button {
+      background: #9f293f;
+    }
+    .setting-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .setting-option:last-child {
+      border-bottom: 0;
+    }
+    .setting-option p {
+      margin: 5px 0 0;
+      font-size: 12px;
+      opacity: .65;
+    }
+    .setting-option input {
+      width: 19px;
+      height: 19px;
+      accent-color: #9561ff;
+    }
+    .settings-note {
+      font-size: 12px;
+      opacity: .65;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="settings-page">
+    <a href="dashboard.html">← Back to Dashboard</a>
+
+    <header style="margin-top:25px">
+      <p style="color:#a78bfa;font-weight:bold">ACCOUNT CONTROL</p>
+      <h1>Settings</h1>
+      <p>Manage your IGEE ARENA account and preferences.</p>
+    </header>
+
+    <section class="settings-card">
+      <h2>👤 Account Information</h2>
+      <p>Manage your personal and gaming profile details.</p>
+      <a href="profile.html">View and manage your profile →</a>
+      <p class="settings-note">
+        Your private account information will only be accessible through
+        your authenticated account after backend integration.
+      </p>
+    </section>
+
+    <section class="settings-card">
+      <h2>🔐 Change Password</h2>
+
+      <form class="settings-form" id="passwordForm">
+        <label>
+          Current password
+          <input type="password" id="currentPassword"
+            autocomplete="current-password" required>
+        </label>
+
+        <label>
+          New password
+          <input type="password" id="newPassword"
+            autocomplete="new-password" minlength="8" required>
+        </label>
+
+        <label>
+          Confirm new password
+          <input type="password" id="confirmPassword"
+            autocomplete="new-password" minlength="8" required>
+        </label>
+
+        <button class="settings-button" type="submit">
+          UPDATE PASSWORD
+        </button>
+      </form>
+
+      <p id="passwordStatus" role="status" aria-live="polite"></p>
+      <p class="settings-note">
+        Password changes will be securely connected to Supabase
+        authentication. This form is currently a frontend preview.
+      </p>
+    </section>
+
+    <section class="settings-card">
+      <h2>🛡️ Security Preferences</h2>
+
+      <div class="setting-option">
+        <div>
+          <strong>Login notifications</strong>
+          <p>Receive alerts about new account sign-ins.</p>
+        </div>
+        <input type="checkbox" id="loginAlerts" checked>
+      </div>
+
+      <div class="setting-option">
+        <div>
+          <strong>Security alerts</strong>
+          <p>Receive important account security warnings.</p>
+        </div>
+        <input type="checkbox" id="securityAlerts" checked>
+      </div>
+
+      <p class="settings-note">
+        These preferences will be saved to your account after backend
+        integration.
+      </p>
+    </section>
+
+    <section class="settings-card">
+      <h2>🔔 Notification Preferences</h2>
+
+      <div class="setting-option">
+        <div>
+          <strong>Challenge notifications</strong>
+          <p>Invitations and challenge updates.</p>
+        </div>
+        <input type="checkbox" id="challengeAlerts" checked>
+      </div>
+
+      <div class="setting-option">
+        <div>
+          <strong>Match notifications</strong>
+          <p>Match reminders and result updates.</p>
+        </div>
+        <input type="checkbox" id="matchAlerts" checked>
+      </div>
+
+      <div class="setting-option">
+        <div>
+          <strong>Tournament announcements</strong>
+          <p>Upcoming tournaments and important updates.</p>
+        </div>
+        <input type="checkbox" id="tournamentAlerts" checked>
+      </div>
+
+      <div class="setting-option">
+        <div>
+          <strong>Wallet notifications</strong>
+          <p>Deposit, withdrawal and transaction updates.</p>
+        </div>
+        <input type="checkbox" id="walletAlerts" checked>
+      </div>
+
+      <button class="settings-button" id="savePreferences" type="button">
+        SAVE PREFERENCES
+      </button>
+
+      <p id="preferencesStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="settings-card">
+      <h2>⚠️ Account Deactivation</h2>
+      <p>
+        If you need a break from IGEE ARENA, you can request temporary
+        account deactivation.
+      </p>
+      <button class="settings-button danger-button"
+        id="deactivationButton" type="button">
+        REQUEST DEACTIVATION
+      </button>
+      <p id="deactivationStatus" role="status" aria-live="polite"></p>
+      <p class="settings-note">
+        This is only a request preview. It will not deactivate your
+        account until a secure backend process is implemented.
+        Permanent account closure will have a separate confirmation process.
+      </p>
+    </section>
+
+    <section class="settings-card">
+      <h2>🚪 Sign Out</h2>
+      <p>Sign out of your IGEE ARENA account on this device.</p>
+      <button class="settings-button danger-button"
+        id="logoutButton" type="button">
+        SIGN OUT
+      </button>
+      <p class="settings-note">
+        Actual secure sign-out will be connected to Supabase later.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const passwordForm = document.getElementById("passwordForm");
+
+    passwordForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const current = document.getElementById("currentPassword").value;
+      const password = document.getElementById("newPassword").value;
+      const confirm = document.getElementById("confirmPassword").value;
+      const status = document.getElementById("passwordStatus");
+
+      if (password.length < 8) {
+        status.textContent = "Your new password must contain at least 8 characters.";
+        return;
+      }
+
+      if (password !== confirm) {
+        status.textContent = "Your new passwords do not match.";
+        return;
+      }
+
+      if (current === password) {
+        status.textContent = "Choose a different new password.";
+        return;
+      }
+
+      status.textContent =
+        "Password form validated. Secure password updating will be enabled during backend integration.";
+    });
+
+    document.getElementById("savePreferences").addEventListener("click", () => {
+      document.getElementById("preferencesStatus").textContent =
+        "Your preferences are ready. Account saving will be enabled during backend integration.";
+    });
+
+    document.getElementById("deactivationButton").addEventListener("click", () => {
+      const confirmed = confirm(
+        "Would you like to prepare a temporary account deactivation request?"
+      );
+
+      if (confirmed) {
+        document.getElementById("deactivationStatus").textContent =
+          "Deactivation request preview confirmed. Secure submission will be enabled later.";
+      }
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", () => {
+      const confirmed = confirm("Are you sure you want to sign out?");
+
+      if (confirmed) {
+        alert("Secure sign-out will be enabled when authentication is connected.");
+      }
+    });
+  </script>
+</body>
+</html>
