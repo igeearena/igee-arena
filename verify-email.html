@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Verify Email | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .verify-page {
+      min-height: 100vh;
+      padding: 30px 18px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(ellipse at top, #30205d 0%, transparent 55%),
+        #080817;
+    }
+
+    .verify-card {
+      width: 100%;
+      max-width: 470px;
+      padding: 35px 25px;
+      text-align: center;
+      background: #111126;
+      border: 1px solid #39305f;
+      border-radius: 18px;
+      box-shadow: 0 15px 60px #0008;
+    }
+
+    .verify-logo {
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .verify-icon {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #251c45;
+      border: 1px solid #8b5cf6;
+      color: #b69aff;
+      font-size: 34px;
+    }
+
+    .verify-card h1 {
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+
+    .verify-description {
+      color: #aaaac5;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 27px;
+    }
+
+    .email-display {
+      color: #c4aaff;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    .otp-input {
+      width: 100%;
+      min-height: 62px;
+      padding: 12px;
+      background: #080817;
+      color: white;
+      border: 1px solid #514078;
+      border-radius: 10px;
+      font-size: 27px;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 12px;
+      outline: none;
+    }
+
+    .otp-input:focus {
+      border-color: #a78bfa;
+      box-shadow: 0 0 0 3px #8b5cf633;
+    }
+
+    .verify-button {
+      width: 100%;
+      min-height: 51px;
+      margin-top: 22px;
+      border: 0;
+      border-radius: 9px;
+      background: linear-gradient(120deg, #8b5cf6, #397bff);
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .resend-area {
+      margin-top: 24px;
+      color: #aaaac5;
+      font-size: 13px;
+    }
+
+    .resend-area button {
+      background: none;
+      border: none;
+      color: #b69aff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .verify-message {
+      display: none;
+      padding: 12px;
+      margin-top: 18px;
+      border-radius: 8px;
+      background: #142f26;
+      border: 1px solid #237c56;
+      color: #76e5a9;
+      font-size: 13px;
+    }
+
+    .verify-footer {
+      color: #77778f;
+      font-size: 11px;
+      margin-top: 28px;
+    }
+
+    @media(max-width: 400px) {
+      .verify-card {
+        padding: 30px 18px;
+      }
+
+      .verify-card h1 {
+        font-size: 23px;
+      }
+
+      .otp-input {
+        letter-spacing: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="verify-page">
+    <section class="verify-card">
+
+      <div class="verify-logo">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">IA</span>
+          <span>IGEE <strong>ARENA</strong></span>
+        </a>
+      </div>
+
+      <div class="verify-icon">✉</div>
+
+      <h1>VERIFY YOUR EMAIL</h1>
+
+      <p class="verify-description">
+        We've sent a six-digit verification code to your email address.
+        Enter the code below to continue your IGEE ARENA registration.
+      </p>
+
+      <p class="email-display" id="verificationEmail">
+        Your registered email address
+      </p>
+
+      <form id="verificationForm">
+        <div style="margin-top:25px">
+          <input
+            class="otp-input"
+            type="text"
+            id="verificationCode"
+            name="token"
+            placeholder="000000"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="[0-9]{6}"
+            maxlength="6"
+            aria-label="Six digit verification code"
+            required
+          >
+        </div>
+
+        <button class="verify-button" type="submit">
+          VERIFY MY EMAIL
+        </button>
+      </form>
+
+      <div class="verify-message" id="verifyMessage">
+        Your code has been submitted.
+      </div>
+
+      <div class="resend-area">
+        Didn't receive the code?
+        <br>
+        <button type="button" id="resendCode">
+          RESEND CODE
+        </button>
+      </div>
+
+      <p class="verify-footer">
+        Keep your verification code private.
+        IGEE ARENA will never ask you to share it with another player.
+      </p>
+
+    </section>
+  </main>
+</body>
+</html>
