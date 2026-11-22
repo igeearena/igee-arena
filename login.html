@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Sign In | IGEE ARENA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .login-page {
+      min-height: 100vh;
+      padding: 25px 18px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(ellipse at top, #30205d 0%, transparent 55%),
+        #080817;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 460px;
+      padding: 35px 28px;
+      background: #111126;
+      border: 1px solid #39305f;
+      border-radius: 18px;
+      box-shadow: 0 15px 60px #0008;
+    }
+
+    .login-brand {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 35px;
+    }
+
+    .login-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-heading h1 {
+      font-size: 29px;
+      margin-bottom: 9px;
+    }
+
+    .login-heading p {
+      color: #aaaac5;
+      font-size: 13px;
+    }
+
+    .login-form-group {
+      margin-bottom: 21px;
+    }
+
+    .login-form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .login-form-group input {
+      width: 100%;
+      min-height: 51px;
+      padding: 13px;
+      background: #09091a;
+      color: white;
+      border: 1px solid #353553;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .login-form-group input:focus {
+      border-color: #a78bfa;
+      box-shadow: 0 0 0 2px #8b5cf633;
+    }
+
+    .login-form-group input::placeholder {
+      color: #77778f;
+    }
+
+    .login-phone-field {
+      display: flex;
+      gap: 9px;
+    }
+
+    .login-prefix {
+      min-width: 72px;
+      display: grid;
+      place-items: center;
+      background: #20203c;
+      border: 1px solid #353553;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 70px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #b69aff;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .forgot-password {
+      display: block;
+      text-align: right;
+      margin-top: 10px;
+      color: #b69aff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .login-submit {
+      width: 100%;
+      min-height: 53px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 9px;
+      background: linear-gradient(120deg, #8b5cf6, #397bff);
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .login-submit:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    .login-message {
+      display: none;
+      margin-top: 17px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      background: #30251a;
+      border: 1px solid #8d6835;
+      color: #f4d49a;
+    }
+
+    .login-register {
+      text-align: center;
+      margin-top: 25px;
+      color: #aaaac5;
+      font-size: 13px;
+    }
+
+    .login-register a {
+      color: #b69aff;
+      font-weight: bold;
+    }
+
+    .login-security {
+      text-align: center;
+      color: #77778f;
+      font-size: 11px;
+      margin-top: 25px;
+      line-height: 1.6;
+    }
+
+    @media(max-width: 400px) {
+      .login-card {
+        padding: 28px 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="login-page">
+    <section class="login-card">
+
+      <div class="login-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">IA</span>
+          <span>IGEE <strong>ARENA</strong></span>
+        </a>
+      </div>
+
+      <div class="login-heading">
+        <span class="eyebrow">WELCOME BACK</span>
+        <h1>SIGN IN</h1>
+        <p>Enter your details to return to the arena.</p>
+      </div>
+
+      <form id="loginForm">
+
+        <div class="login-form-group">
+          <label for="loginPhone">Phone Number</label>
+
+          <div class="login-phone-field">
+            <span class="login-prefix">+234</span>
+
+            <input
+              type="tel"
+              id="loginPhone"
+              name="phone"
+              placeholder="8012345678"
+              inputmode="numeric"
+              autocomplete="tel-national"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="login-form-group">
+          <label for="loginPassword">Password</label>
+
+          <div class="password-wrap">
+            <input
+              type="password"
+              id="loginPassword"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="password-toggle"
+              id="togglePassword"
+              aria-label="Show password"
+            >
+              SHOW
+            </button>
+          </div>
+
+          <a class="forgot-password" href="forgot-password.html">
+            Forgot password?
+          </a>
+        </div>
+
+        <button class="login-submit" type="submit">
+          SIGN IN
+        </button>
+
+        <div class="login-message" id="loginMessage">
+          Sign-in will be available after secure account integration.
+        </div>
+
+      </form>
+
+      <p class="login-register">
+        Don't have an account?
+        <a href="register.html">REGISTER NOW</a>
+      </p>
+
+      <p class="login-security">
+        Your account is protected by IGEE ARENA security systems.
+        Members and authorised administrators use this same login page.
+      </p>
+
+    </section>
+  </main>
+
+  <script>
+    const passwordInput = document.getElementById("loginPassword");
+    const togglePassword = document.getElementById("togglePassword");
+
+    togglePassword.addEventListener("click", function () {
+      const isHidden = passwordInput.type === "password";
+
+      passwordInput.type = isHidden ? "text" : "password";
+      togglePassword.textContent = isHidden ? "HIDE" : "SHOW";
+      togglePassword.setAttribute(
+        "aria-label",
+        isHidden ? "Hide password" : "Show password"
+      );
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const message = document.getElementById("loginMessage");
+      message.style.display = "block";
+      message.textContent =
+        "Secure sign-in is being prepared. Please check back after backend integration.";
+    });
+  </script>
+</body>
+</html>
