@@ -1,14 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080817">
+  <meta name="description" content="IGEE ARENA Match Room">
   <title>Match Room | IGEE ARENA</title>
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -20,6 +24,10 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
     }
 
     .page {
@@ -75,14 +83,14 @@
     }
 
     .notice {
-      padding: 13px;
+      padding: 14px;
       margin: 17px 0;
       background: #29213d;
       border: 1px solid #614b91;
       border-radius: 9px;
       color: #dfd2ff;
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .section-title {
@@ -233,16 +241,45 @@
       resize: vertical;
     }
 
-    .disabled-btn {
+    .primary-btn,
+    .secondary-btn,
+    .win-btn,
+    .loss-btn {
       width: 100%;
-      padding: 13px;
-      margin-top: 8px;
+      padding: 14px;
+      margin-top: 9px;
       border: none;
       border-radius: 8px;
-      background: #39304f;
-      color: #c5b5d9;
       font-size: 12px;
       font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: #302451;
+      border: 1px solid #6546a4;
+      color: #e4d9ff;
+    }
+
+    .win-btn {
+      background: #145b3a;
+      border: 1px solid #238957;
+      color: #b8ffda;
+    }
+
+    .loss-btn {
+      background: #55242e;
+      border: 1px solid #a34355;
+      color: #ffd1d8;
+    }
+
+    button:disabled {
+      opacity: .5;
       cursor: not-allowed;
     }
 
@@ -259,6 +296,126 @@
       margin-bottom: 10px;
     }
 
+    .rule-card {
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #080817;
+      border: 1px solid #39305f;
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #c5c5dd;
+    }
+
+    .rule-card strong {
+      color: white;
+    }
+
+    .step {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      margin: 13px 0;
+      color: #c5c5dd;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .step-number {
+      min-width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #302451;
+      color: #d9caff;
+      font-weight: bold;
+    }
+
+    .result-choice {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .result-choice button {
+      margin: 0;
+      min-height: 75px;
+    }
+
+    .result-choice button.selected {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+
+    .upload-box {
+      padding: 18px;
+      text-align: center;
+      background: #080817;
+      border: 1px dashed #6546a4;
+      border-radius: 9px;
+    }
+
+    .upload-box label {
+      display: block;
+      margin-bottom: 12px;
+      color: #d4c5ff;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .upload-box input {
+      width: 100%;
+      color: #aaaac5;
+      font-size: 11px;
+    }
+
+    .preview-image {
+      display: none;
+      max-width: 100%;
+      max-height: 280px;
+      margin: 15px auto 0;
+      border-radius: 8px;
+      border: 1px solid #6546a4;
+    }
+
+    .status-box {
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 9px;
+      background: #21183a;
+      border: 1px solid #6546a4;
+      color: #e0d5ff;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .warning-box {
+      padding: 14px;
+      background: #392c17;
+      border: 1px solid #80632b;
+      border-radius: 9px;
+      color: #ffe4a6;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .success-box {
+      padding: 14px;
+      background: #123625;
+      border: 1px solid #287a50;
+      border-radius: 9px;
+      color: #b9f5d3;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     .footer {
       padding: 35px 0 15px;
       color: #77778f;
@@ -269,6 +426,20 @@
     @media(min-width: 650px) {
       .players {
         grid-template-columns: 1fr 70px 1fr;
+      }
+    }
+
+    @media(max-width: 420px) {
+      .page {
+        padding: 14px;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+
+      .result-choice {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -297,10 +468,11 @@
     </section>
 
     <div class="notice">
-      <strong>Match room preview:</strong>
-      Live matches are not yet connected. Match information,
-      player readiness, results and disputes will become
-      functional after secure backend integration.
+      <strong>Important:</strong>
+      Match information, result submissions, evidence storage,
+      countdowns and wallet payments will become live after
+      secure backend integration. This page currently provides
+      an interactive preview only.
     </div>
 
     <h2 class="section-title">ACTIVE MATCH</h2>
@@ -310,8 +482,8 @@
         <div class="empty-icon">🎮</div>
         <strong>No active match available</strong>
         <p>
-          When you accept a challenge and a match is
-          created, its details will appear here.
+          When you accept a challenge and a match is created,
+          its details will appear here.
         </p>
         <a href="challenges.html"
            style="color:#c5a9ff;font-weight:bold;">
@@ -371,6 +543,9 @@
     <section class="timer">
       <span>MATCH COUNTDOWN</span>
       <strong>-- : -- : --</strong>
+      <p style="color:#aaaac5;font-size:11px;">
+        The official countdown will be synchronized by the server.
+      </p>
     </section>
 
     <h2 class="section-title">READY CONFIRMATION</h2>
@@ -381,52 +556,239 @@
         before an authorized match countdown begins.
       </p>
 
-      <button class="disabled-btn" type="button" disabled>
-        READY — UNAVAILABLE
+      <button class="secondary-btn" type="button" disabled>
+        READY — WAITING FOR MATCH
       </button>
     </section>
 
-    <h2 class="section-title">SUBMIT MATCH RESULT</h2>
+    <h2 class="section-title">MATCH RESULT SUBMISSION</h2>
 
     <section class="panel">
-      <div class="field">
-        <label for="matchResult">Your Match Result</label>
-        <select id="matchResult" disabled>
-          <option value="">Select result</option>
-          <option value="win">I Won</option>
-          <option value="loss">I Lost</option>
-        </select>
+
+      <span class="match-status">RESULT SUBMISSION PREVIEW</span>
+
+      <p style="color:#c5c5dd;font-size:12px;line-height:1.8;">
+        Finished your game? Tell IGEE ARENA what happened.
+        Select your result and upload a screenshot of the
+        completed match.
+      </p>
+
+      <div class="rule-card">
+        <strong>Five-minute response rule</strong><br>
+        Once a player submits an <strong>I WON</strong> claim
+        with screenshot evidence, the opponent will have five
+        minutes to respond.
+
+        If the opponent confirms the loss, the evidence can
+        proceed through verification.
+
+        If the opponent also claims victory, the match goes
+        to admin review.
+
+        If the opponent does not respond within five minutes,
+        the winning claim may qualify for automatic wallet
+        settlement after the required evidence and security
+        checks.
       </div>
 
-      <div class="field">
-        <label for="resultDetails">Match Details</label>
-        <textarea
-          id="resultDetails"
-          placeholder="Enter additional match information"
-          disabled
-        ></textarea>
+      <div class="warning-box">
+        <strong>Important:</strong>
+        If neither player submits a winning claim, the money
+        remains reserved. The five-minute response countdown
+        does not begin until the first winning claim is submitted.
       </div>
 
-      <div class="field">
-        <label for="resultEvidence">Upload Screenshot Evidence</label>
-        <input
-          id="resultEvidence"
-          type="file"
-          accept="image/*"
-          disabled
+      <div id="finishSection" style="margin-top:20px;">
+
+        <button
+          type="button"
+          class="primary-btn"
+          id="finishMatchBtn"
         >
+          ✓ I HAVE FINISHED PLAYING
+        </button>
+
+        <p style="color:#9292ae;font-size:10px;line-height:1.6;">
+          Only click this after your game has actually ended.
+        </p>
+
       </div>
 
-      <button class="disabled-btn" type="button" disabled>
-        SUBMIT RESULT — UNAVAILABLE
-      </button>
+      <div id="resultForm" class="hidden">
+
+        <div class="status-box">
+          <strong>Choose your actual match result.</strong><br>
+          You must upload screenshot evidence with your result.
+          Submitting false results can lead to account restrictions.
+        </div>
+
+        <div class="result-choice">
+
+          <button
+            type="button"
+            class="win-btn"
+            id="wonBtn"
+            aria-pressed="false"
+          >
+            🏆 I WON
+          </button>
+
+          <button
+            type="button"
+            class="loss-btn"
+            id="lostBtn"
+            aria-pressed="false"
+          >
+            ✕ I LOST
+          </button>
+
+        </div>
+
+        <input type="hidden" id="selectedResult" value="">
+
+        <div class="field">
+          <label for="resultDetails">
+            Additional Match Details (Optional)
+          </label>
+
+          <textarea
+            id="resultDetails"
+            maxlength="1000"
+            placeholder="Add any useful information about your match..."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label>Screenshot Evidence (Required)</label>
+
+          <div class="upload-box">
+            <label for="resultEvidence">
+              📷 SELECT MATCH SCREENSHOT
+            </label>
+
+            <input
+              id="resultEvidence"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+            >
+
+            <img
+              id="resultPreview"
+              class="preview-image"
+              alt="Selected match screenshot preview"
+            >
+
+            <p
+              id="uploadMessage"
+              style="color:#9292ae;font-size:10px;line-height:1.6;"
+            >
+              Upload a clear screenshot showing the completed match.
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="primary-btn"
+          id="submitResultBtn"
+        >
+          SUBMIT MATCH RESULT
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          id="cancelResultBtn"
+        >
+          CANCEL
+        </button>
+
+        <div id="formMessage" class="status-box hidden"></div>
+
+      </div>
+
+      <div id="submittedSection" class="hidden">
+
+        <div class="success-box">
+          <strong>Preview submission completed.</strong>
+          <p id="submittedResultText"></p>
+        </div>
+
+        <div class="status-box">
+          <strong>Five-minute response window</strong>
+          <p>
+            The official server will start the five-minute
+            countdown when it receives a valid winning claim.
+            The opponent will receive a notification to respond.
+          </p>
+          <strong>Official countdown: Awaiting backend connection</strong>
+        </div>
+
+        <p style="color:#aaaac5;font-size:11px;line-height:1.7;">
+          This preview does not send evidence to the server,
+          notify your opponent or release money.
+        </p>
+
+      </div>
+
+    </section>
+
+    <h2 class="section-title">HOW MATCH PAYMENT WORKS</h2>
+
+    <section class="panel">
+
+      <div class="step">
+        <span class="step-number">1</span>
+        <div>
+          <strong>Winner submits evidence</strong><br>
+          The winning player selects I WON and uploads a
+          screenshot of the match result.
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-number">2</span>
+        <div>
+          <strong>Opponent gets five minutes</strong><br>
+          The other player can confirm the result or submit
+          a conflicting claim.
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-number">3</span>
+        <div>
+          <strong>Evidence verification</strong><br>
+          The system checks the submitted evidence.
+          AI can flag possible manipulation for further review.
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-number">4</span>
+        <div>
+          <strong>Payment or admin review</strong><br>
+          Eligible uncontested claims can be settled.
+          Conflicting or suspicious claims go to admin review.
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <strong>AI does not make the final decision.</strong>
+        Suspicious screenshots are flagged for the admin.
+        AI must not automatically reject evidence or release
+        money based only on an image assessment.
+      </div>
+
     </section>
 
     <h2 class="section-title">REPORT A MATCH DISPUTE</h2>
 
     <section class="panel">
+
       <div class="field">
         <label for="disputeReason">Describe the problem</label>
+
         <textarea
           id="disputeReason"
           placeholder="Explain what happened during the match..."
@@ -435,24 +797,28 @@
       </div>
 
       <div class="field">
-        <label for="disputeEvidence">Upload Supporting Evidence</label>
+        <label for="disputeEvidence">
+          Upload Supporting Evidence
+        </label>
+
         <input
           id="disputeEvidence"
           type="file"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
           multiple
           disabled
         >
       </div>
 
-      <button class="disabled-btn" type="button" disabled>
-        SUBMIT DISPUTE — UNAVAILABLE
+      <button class="secondary-btn" type="button" disabled>
+        SUBMIT DISPUTE — BACKEND REQUIRED
       </button>
 
       <p style="color:#9292ae;font-size:11px;line-height:1.7;">
         Disputes will be reviewed by authorized IGEE ARENA
         moderators using submitted evidence and match records.
       </p>
+
     </section>
 
     <footer class="footer">
@@ -465,6 +831,216 @@
   <script>
     document.getElementById("year").textContent =
       new Date().getFullYear();
+
+    const finishMatchBtn =
+      document.getElementById("finishMatchBtn");
+
+    const finishSection =
+      document.getElementById("finishSection");
+
+    const resultForm =
+      document.getElementById("resultForm");
+
+    const wonBtn =
+      document.getElementById("wonBtn");
+
+    const lostBtn =
+      document.getElementById("lostBtn");
+
+    const selectedResult =
+      document.getElementById("selectedResult");
+
+    const resultEvidence =
+      document.getElementById("resultEvidence");
+
+    const resultPreview =
+      document.getElementById("resultPreview");
+
+    const uploadMessage =
+      document.getElementById("uploadMessage");
+
+    const submitResultBtn =
+      document.getElementById("submitResultBtn");
+
+    const cancelResultBtn =
+      document.getElementById("cancelResultBtn");
+
+    const formMessage =
+      document.getElementById("formMessage");
+
+    const submittedSection =
+      document.getElementById("submittedSection");
+
+    const submittedResultText =
+      document.getElementById("submittedResultText");
+
+    let selectedImageUrl = null;
+
+    finishMatchBtn.addEventListener("click", function() {
+      finishSection.classList.add("hidden");
+      resultForm.classList.remove("hidden");
+
+      resultForm.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    function selectResult(result) {
+      selectedResult.value = result;
+
+      wonBtn.classList.toggle("selected", result === "win");
+      lostBtn.classList.toggle("selected", result === "loss");
+
+      wonBtn.setAttribute(
+        "aria-pressed",
+        result === "win" ? "true" : "false"
+      );
+
+      lostBtn.setAttribute(
+        "aria-pressed",
+        result === "loss" ? "true" : "false"
+      );
+
+      formMessage.classList.add("hidden");
+    }
+
+    wonBtn.addEventListener("click", function() {
+      selectResult("win");
+    });
+
+    lostBtn.addEventListener("click", function() {
+      selectResult("loss");
+    });
+
+    resultEvidence.addEventListener("change", function() {
+      const file = resultEvidence.files[0];
+
+      if (selectedImageUrl) {
+        URL.revokeObjectURL(selectedImageUrl);
+        selectedImageUrl = null;
+      }
+
+      resultPreview.style.display = "none";
+      resultPreview.removeAttribute("src");
+
+      if (!file) {
+        uploadMessage.textContent =
+          "Upload a clear screenshot showing the completed match.";
+        return;
+      }
+
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ];
+
+      if (!allowedTypes.includes(file.type)) {
+        resultEvidence.value = "";
+
+        uploadMessage.textContent =
+          "Please select a JPG, PNG or WEBP image.";
+
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        resultEvidence.value = "";
+
+        uploadMessage.textContent =
+          "Your screenshot must not exceed 5 MB.";
+
+        return;
+      }
+
+      selectedImageUrl = URL.createObjectURL(file);
+
+      resultPreview.src = selectedImageUrl;
+      resultPreview.style.display = "block";
+
+      uploadMessage.textContent =
+        "Screenshot selected: " + file.name;
+    });
+
+    submitResultBtn.addEventListener("click", function() {
+      const result = selectedResult.value;
+      const file = resultEvidence.files[0];
+
+      if (!result) {
+        formMessage.textContent =
+          "Please select I WON or I LOST.";
+        formMessage.classList.remove("hidden");
+        return;
+      }
+
+      if (!file) {
+        formMessage.textContent =
+          "Please upload your match screenshot.";
+        formMessage.classList.remove("hidden");
+        return;
+      }
+
+      if (
+        !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
+        file.size > 5 * 1024 * 1024
+      ) {
+        formMessage.textContent =
+          "Please upload a valid JPG, PNG or WEBP screenshot under 5 MB.";
+        formMessage.classList.remove("hidden");
+        return;
+      }
+
+      formMessage.textContent =
+        "Your information is valid for this interface preview. " +
+        "Actual submission requires the secure IGEE ARENA backend.";
+
+      formMessage.classList.remove("hidden");
+
+      submitResultBtn.disabled = true;
+      submitResultBtn.textContent = "PREVIEW COMPLETE";
+
+      submittedResultText.textContent =
+        result === "win"
+          ? "You selected I WON and attached screenshot evidence."
+          : "You selected I LOST and attached screenshot evidence.";
+
+      submittedSection.classList.remove("hidden");
+
+      submittedSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    cancelResultBtn.addEventListener("click", function() {
+      resultForm.classList.add("hidden");
+      finishSection.classList.remove("hidden");
+
+      selectedResult.value = "";
+
+      wonBtn.classList.remove("selected");
+      lostBtn.classList.remove("selected");
+
+      wonBtn.setAttribute("aria-pressed", "false");
+      lostBtn.setAttribute("aria-pressed", "false");
+
+      resultEvidence.value = "";
+      resultPreview.style.display = "none";
+
+      if (selectedImageUrl) {
+        URL.revokeObjectURL(selectedImageUrl);
+        selectedImageUrl = null;
+      }
+
+      formMessage.classList.add("hidden");
+    });
+
+    window.addEventListener("beforeunload", function() {
+      if (selectedImageUrl) {
+        URL.revokeObjectURL(selectedImageUrl);
+      }
+    });
   </script>
 
 </body>
