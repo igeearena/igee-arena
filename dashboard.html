@@ -212,7 +212,7 @@
 
     .feature-card {
       min-height: 125px;
-      transition: border-color .2s;
+      transition: border-color .2s, box-shadow .2s;
     }
 
     .feature-card:hover {
@@ -250,6 +250,16 @@
 
     .world-chat-card .feature-icon {
       color: #c4a5ff;
+    }
+
+    .private-chat-card {
+      background: linear-gradient(120deg, #17234a, #111126);
+      border: 1px solid #4568a8;
+    }
+
+    .private-chat-card:hover {
+      border-color: #83aaff;
+      box-shadow: 0 0 18px rgba(57, 123, 255, 0.15);
     }
 
     .announcement-card {
@@ -360,8 +370,8 @@
       <div class="wallet-balance">₦0.00</div>
 
       <div class="wallet-actions">
-        <a href="#deposit" class="action-btn primary-btn">DEPOSIT</a>
-        <a href="#withdraw" class="action-btn secondary-btn">WITHDRAW</a>
+        <a href="wallet.html" class="action-btn primary-btn">DEPOSIT</a>
+        <a href="wallet.html" class="action-btn secondary-btn">WITHDRAW</a>
       </div>
 
       <p class="wallet-note">
@@ -399,10 +409,24 @@
 
       <div class="feature-grid">
 
-        <a href="world-chat.html" class="feature-card world-chat-card">
+        <a href="world-chat.html"
+           class="feature-card world-chat-card">
           <div class="feature-icon">🌍</div>
           <h3>WORLD CHAT</h3>
-          <p>Join the global community. Chat with players, the owner and authorized admins.</p>
+          <p>
+            Join the global community. Chat with players,
+            the owner and authorized admins.
+          </p>
+        </a>
+
+        <a href="private-chat.html"
+           class="feature-card private-chat-card">
+          <div class="feature-icon">💬</div>
+          <h3>PRIVATE CHAT</h3>
+          <p>
+            Send private messages and connect one-to-one
+            with other IGEE ARENA players.
+          </p>
         </a>
 
         <a href="games.html" class="feature-card">
