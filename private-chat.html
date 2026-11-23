@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>PRIVATE CHAT | IGEE ARENA</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #080817;
+      color: #f7f7ff;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .chat-page {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 22px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .page-header h1 {
+      color: #c4a5ff;
+      font-size: 23px;
+      margin: 0;
+    }
+
+    .back-link {
+      color: #c5b5ff;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .intro {
+      color: #aaaac5;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 20px 0;
+    }
+
+    .private-chat-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 550px;
+      background: #111126;
+      border: 1px solid #292943;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .conversation-list {
+      border-right: 1px solid #292943;
+      padding: 18px;
+    }
+
+    .conversation-list h2 {
+      font-size: 15px;
+      margin: 0 0 17px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #393958;
+      background: #080817;
+      color: white;
+      outline: none;
+      margin-bottom: 17px;
+    }
+
+    .empty-conversations {
+      text-align: center;
+      color: #8585a4;
+      font-size: 12px;
+      line-height: 1.7;
+      padding: 30px 8px;
+    }
+
+    .chat-window {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .chat-person {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 17px;
+      border-bottom: 1px solid #292943;
+    }
+
+    .avatar {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6, #397bff);
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .person-details h2 {
+      font-size: 14px;
+      margin: 0 0 5px;
+    }
+
+    .person-details p {
+      color: #9999b8;
+      font-size: 11px;
+      margin: 0;
+    }
+
+    .chat-messages {
+      flex: 1;
+      min-height: 300px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .empty-chat-icon {
+      font-size: 42px;
+      margin-bottom: 13px;
+    }
+
+    .chat-messages h3 {
+      font-size: 16px;
+      margin: 0 0 8px;
+    }
+
+    .chat-messages p {
+      color: #9999b8;
+      font-size: 12px;
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    .message-bubble {
+      display: inline-block;
+      max-width: 80%;
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: #242440;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .message-bubble.mine {
+      background: #5935a4;
+      align-self: flex-end;
+    }
+
+    .message-bubble.theirs {
+      align-self: flex-start;
+    }
+
+    .chat-composer {
+      display: flex;
+      gap: 9px;
+      padding: 15px;
+      border-top: 1px solid #292943;
+    }
+
+    .chat-composer input {
+      flex: 1;
+      min-width: 0;
+      background: #080817;
+      border: 1px solid #393958;
+      border-radius: 9px;
+      padding: 13px;
+      color: white;
+      outline: none;
+    }
+
+    .chat-composer button {
+      background: #8b5cf6;
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 0 17px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .chat-note {
+      color: #777794;
+      font-size: 11px;
+      line-height: 1.6;
+      padding: 0 15px 15px;
+    }
+
+    @media(max-width: 650px) {
+      .chat-page {
+        padding: 14px;
+      }
+
+      .private-chat-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .conversation-list {
+        border-right: none;
+        border-bottom: 1px solid #292943;
+      }
+
+      .empty-conversations {
+        padding: 15px 8px;
+      }
+
+      .chat-messages {
+        min-height: 270px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="chat-page">
+
+    <header class="page-header">
+      <h1>💬 PRIVATE CHAT</h1>
+      <a href="dashboard.html" class="back-link">
+        ← DASHBOARD
+      </a>
+    </header>
+
+    <p class="intro">
+      Connect privately with other IGEE ARENA players.
+      Your one-to-one conversations belong here.
+    </p>
+
+    <section class="private-chat-layout">
+
+      <aside class="conversation-list">
+
+        <h2>YOUR CONVERSATIONS</h2>
+
+        <input
+          class="search-box"
+          type="search"
+          placeholder="Search conversations..."
+          aria-label="Search conversations"
+          disabled
+        >
+
+        <div class="empty-conversations">
+          <div style="font-size:30px; margin-bottom:10px;">👥</div>
+          <strong>No conversations yet</strong>
+          <p>
+            When you start chatting with a player,
+            your conversations will appear here.
+          </p>
+        </div>
+
+      </aside>
+
+      <section class="chat-window">
+
+        <header class="chat-person">
+          <div class="avatar">?</div>
+
+          <div class="person-details">
+            <h2>Select a player</h2>
+            <p>Private one-to-one conversation</p>
+          </div>
+        </header>
+
+        <div class="chat-messages">
+
+          <div class="empty-chat-icon">💬</div>
+
+          <h3>Your private messages</h3>
+
+          <p>
+            Select a player from your conversations or use
+            CHAT PLAYER on a player's profile to start a
+            private conversation.
+          </p>
+
+        </div>
+
+        <form class="chat-composer" id="privateChatForm">
+
+          <input
+            type="text"
+            id="privateMessage"
+            placeholder="Write a private message..."
+            autocomplete="off"
+          >
+
+          <button type="submit">SEND</button>
+
+        </form>
+
+        <div class="chat-note">
+          Keep conversations respectful. Reporting and blocking
+          controls will be available when messaging is connected.
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+  <script>
+    document.getElementById("privateChatForm").addEventListener(
+      "submit",
+      function(event) {
+        event.preventDefault();
+
+        alert(
+          "Private messaging will become available after secure backend integration."
+        );
+      }
+    );
+  </script>
+
+</body>
+</html>
