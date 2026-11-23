@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,6 +196,59 @@
       margin-bottom: 10px;
     }
 
+    .profile-actions {
+      margin-top: 22px;
+      padding: 18px;
+      background: #111126;
+      border: 1px solid #39305a;
+      border-radius: 12px;
+    }
+
+    .profile-actions h2 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .profile-actions p {
+      margin: 0 0 15px;
+      color: #aaaac5;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .main-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 11px;
+    }
+
+    .main-action-btn {
+      display: block;
+      padding: 15px;
+      border-radius: 9px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .chat-btn {
+      background: linear-gradient(135deg, #713bd5, #4930a8);
+      border: 1px solid #9a78f5;
+      color: #fff;
+    }
+
+    .challenge-btn {
+      background: linear-gradient(135deg, #214c91, #2635a5);
+      border: 1px solid #557cff;
+      color: #fff;
+    }
+
+    .main-action-btn:active,
+    .action-btn:active {
+      transform: scale(0.98);
+    }
+
     .actions {
       display: grid;
       grid-template-columns: 1fr;
@@ -203,6 +257,7 @@
     }
 
     .action-btn {
+      display: block;
       padding: 13px;
       border: 1px solid #493779;
       border-radius: 8px;
@@ -223,6 +278,10 @@
     @media(min-width: 650px) {
       .stats-grid {
         grid-template-columns: repeat(4, 1fr);
+      }
+
+      .main-actions {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .actions {
@@ -265,6 +324,24 @@
       securely from your IGEE ARENA account after
       backend integration.
     </div>
+
+    <section class="profile-actions">
+      <h2>PLAYER ACTIONS</h2>
+      <p>
+        Connect with this player or challenge them to a
+        competitive match.
+      </p>
+
+      <div class="main-actions">
+        <a href="private-chat.html" class="main-action-btn chat-btn">
+          💬 CHAT PLAYER
+        </a>
+
+        <a href="challenges.html" class="main-action-btn challenge-btn">
+          ⚔️ CHALLENGE
+        </a>
+      </div>
+    </section>
 
     <h2 class="section-title">PLAYER STATISTICS</h2>
 
