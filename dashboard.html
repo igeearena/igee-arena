@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -235,6 +236,58 @@
       margin: 0;
     }
 
+    .world-chat-card {
+      background: linear-gradient(120deg, #21143f, #111126);
+      border: 1px solid #8055df;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .world-chat-card:hover {
+      border-color: #b69aff;
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.16);
+    }
+
+    .world-chat-card .feature-icon {
+      color: #c4a5ff;
+    }
+
+    .announcement-card {
+      background: linear-gradient(120deg, #191532, #111126);
+      border: 1px solid #514078;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .announcement-label {
+      color: #c4a5ff;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .announcement-card h3 {
+      font-size: 16px;
+      margin: 10px 0 7px;
+    }
+
+    .announcement-card p {
+      color: #aaaac5;
+      font-size: 12px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .announcement-empty {
+      text-align: center;
+      padding: 14px 5px;
+    }
+
+    .announcement-empty .announcement-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
     .activity-card {
       color: #aaaac5;
       font-size: 13px;
@@ -346,37 +399,43 @@
 
       <div class="feature-grid">
 
-        <a href="#games" class="feature-card">
+        <a href="world-chat.html" class="feature-card world-chat-card">
+          <div class="feature-icon">🌍</div>
+          <h3>WORLD CHAT</h3>
+          <p>Join the global community. Chat with players, the owner and authorized admins.</p>
+        </a>
+
+        <a href="games.html" class="feature-card">
           <div class="feature-icon">🎮</div>
           <h3>GAMES</h3>
           <p>Explore available competitive games.</p>
         </a>
 
-        <a href="#challenges" class="feature-card">
+        <a href="challenges.html" class="feature-card">
           <div class="feature-icon">⚔️</div>
           <h3>CHALLENGES</h3>
           <p>Find opponents and compete.</p>
         </a>
 
-        <a href="#tournaments" class="feature-card">
+        <a href="tournaments.html" class="feature-card">
           <div class="feature-icon">🏆</div>
           <h3>TOURNAMENTS</h3>
           <p>Discover upcoming competitions.</p>
         </a>
 
-        <a href="#leaderboard" class="feature-card">
+        <a href="leaderboard.html" class="feature-card">
           <div class="feature-icon">📊</div>
           <h3>LEADERBOARD</h3>
           <p>Track rankings and player performance.</p>
         </a>
 
-        <a href="#transactions" class="feature-card">
+        <a href="wallet.html" class="feature-card">
           <div class="feature-icon">💳</div>
-          <h3>TRANSACTIONS</h3>
+          <h3>WALLET</h3>
           <p>View wallet activity and payment history.</p>
         </a>
 
-        <a href="#profile" class="feature-card">
+        <a href="profile.html" class="feature-card">
           <div class="feature-icon">👤</div>
           <h3>MY PROFILE</h3>
           <p>Manage your player information.</p>
@@ -400,6 +459,25 @@
           <p>Get assistance with your account.</p>
         </a>
 
+      </div>
+    </section>
+
+    <section id="announcements">
+      <h2 class="section-title">ARENA ANNOUNCEMENTS</h2>
+
+      <div class="announcement-card">
+        <div class="announcement-label">
+          ★ OFFICIAL IGEE ARENA UPDATES
+        </div>
+
+        <div class="announcement-empty">
+          <div class="announcement-icon">📢</div>
+          <h3>Stay Updated</h3>
+          <p>
+            Tournament announcements, competition news and important
+            updates from the owner and authorized admins will appear here.
+          </p>
+        </div>
       </div>
     </section>
 
