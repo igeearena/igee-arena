@@ -24,6 +24,10 @@
       text-decoration: none;
     }
 
+    button, input {
+      font-family: inherit;
+    }
+
     .chat-page {
       max-width: 1100px;
       margin: auto;
@@ -89,6 +93,10 @@
       margin-bottom: 17px;
     }
 
+    .search-box:focus {
+      border-color: #8b5cf6;
+    }
+
     .empty-conversations {
       text-align: center;
       color: #8585a4;
@@ -106,9 +114,17 @@
     .chat-person {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 12px;
       padding: 17px;
       border-bottom: 1px solid #292943;
+    }
+
+    .person-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
     }
 
     .avatar {
@@ -120,6 +136,7 @@
       background: linear-gradient(135deg, #8b5cf6, #397bff);
       font-weight: bold;
       font-size: 17px;
+      flex-shrink: 0;
     }
 
     .person-details h2 {
@@ -133,15 +150,33 @@
       margin: 0;
     }
 
+    .chat-options {
+      display: flex;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .small-option {
+      background: #21183a;
+      border: 1px solid #493779;
+      border-radius: 7px;
+      color: #c4a5ff;
+      padding: 8px;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     .chat-messages {
       flex: 1;
       min-height: 300px;
       padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       text-align: center;
+      overflow-y: auto;
     }
 
     .empty-chat-icon {
@@ -161,34 +196,181 @@
       max-width: 320px;
     }
 
+    .message-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: left;
+    }
+
+    .message-item {
+      max-width: 85%;
+      align-self: flex-start;
+      touch-action: pan-y;
+    }
+
+    .message-item.mine {
+      align-self: flex-end;
+    }
+
+    .message-sender {
+      color: #b9a0ff;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
     .message-bubble {
       display: inline-block;
-      max-width: 80%;
+      max-width: 100%;
       padding: 11px 14px;
-      border-radius: 12px;
+      border-radius: 5px 13px 13px 13px;
       background: #242440;
       font-size: 13px;
       line-height: 1.6;
       text-align: left;
+      overflow-wrap: anywhere;
     }
 
-    .message-bubble.mine {
+    .message-item.mine .message-bubble {
       background: #5935a4;
-      align-self: flex-end;
+      border-radius: 13px 5px 13px 13px;
     }
 
-    .message-bubble.theirs {
-      align-self: flex-start;
+    .message-time {
+      color: #777794;
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .quoted-message {
+      display: block;
+      background: rgba(0, 0, 0, 0.2);
+      border-left: 3px solid #b9a0ff;
+      border-radius: 5px;
+      padding: 7px 9px;
+      margin-bottom: 7px;
+      font-size: 11px;
+    }
+
+    .quoted-message strong {
+      display: block;
+      color: #d5c2ff;
+      margin-bottom: 3px;
+    }
+
+    .quoted-message span {
+      color: #d4d0e6;
+    }
+
+    .message-image {
+      display: block;
+      max-width: 220px;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 9px;
+      margin-top: 5px;
+    }
+
+    .reply-action {
+      display: block;
+      border: none;
+      background: transparent;
+      color: #a78bfa;
+      padding: 6px 0 0;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .reply-preview {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 14px;
+      background: #21183b;
+      border-top: 1px solid #614b91;
+    }
+
+    .reply-preview.visible {
+      display: flex;
+    }
+
+    .reply-preview-content {
+      min-width: 0;
+      border-left: 3px solid #a78bfa;
+      padding-left: 10px;
+    }
+
+    .reply-preview-label {
+      color: #c4a5ff;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .reply-preview-text {
+      color: #d2cce5;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .cancel-reply {
+      flex-shrink: 0;
+      border: none;
+      background: transparent;
+      color: #aaaac5;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .image-preview {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-top: 1px solid #292945;
+      background: #15152b;
+    }
+
+    .image-preview.visible {
+      display: flex;
+    }
+
+    .image-preview img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #493779;
+    }
+
+    .image-preview-info {
+      flex: 1;
+      min-width: 0;
+      color: #c5b5ff;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .remove-image {
+      background: transparent;
+      border: none;
+      color: #ff8585;
+      font-size: 20px;
+      cursor: pointer;
     }
 
     .chat-composer {
       display: flex;
+      align-items: center;
       gap: 9px;
       padding: 15px;
       border-top: 1px solid #292943;
     }
 
-    .chat-composer input {
+    .chat-composer input[type="text"] {
       flex: 1;
       min-width: 0;
       background: #080817;
@@ -199,12 +381,29 @@
       outline: none;
     }
 
-    .chat-composer button {
+    .chat-composer input:focus {
+      border-color: #8b5cf6;
+    }
+
+    .attach-btn {
+      width: 43px;
+      height: 43px;
+      flex-shrink: 0;
+      background: #252044;
+      border: 1px solid #493779;
+      border-radius: 10px;
+      color: #c4a5ff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .send-btn {
       background: #8b5cf6;
       border: none;
       color: white;
       font-weight: bold;
       padding: 0 17px;
+      height: 43px;
       border-radius: 9px;
       cursor: pointer;
     }
@@ -214,6 +413,17 @@
       font-size: 11px;
       line-height: 1.6;
       padding: 0 15px 15px;
+    }
+
+    .backend-notice {
+      margin-top: 15px;
+      padding: 13px;
+      background: #25213a;
+      border: 1px solid #554278;
+      border-radius: 10px;
+      color: #d4c5f5;
+      font-size: 11px;
+      line-height: 1.6;
     }
 
     @media(max-width: 650px) {
@@ -236,6 +446,23 @@
 
       .chat-messages {
         min-height: 270px;
+      }
+
+      .chat-options {
+        flex-direction: column;
+      }
+
+      .message-item {
+        max-width: 95%;
+      }
+
+      .chat-composer {
+        gap: 6px;
+        padding: 10px;
+      }
+
+      .send-btn {
+        padding: 0 12px;
       }
     }
   </style>
@@ -265,13 +492,13 @@
 
         <input
           class="search-box"
+          id="conversationSearch"
           type="search"
           placeholder="Search conversations..."
           aria-label="Search conversations"
-          disabled
         >
 
-        <div class="empty-conversations">
+        <div class="empty-conversations" id="emptyConversations">
           <div style="font-size:30px; margin-bottom:10px;">👥</div>
           <strong>No conversations yet</strong>
           <p>
@@ -285,15 +512,33 @@
       <section class="chat-window">
 
         <header class="chat-person">
-          <div class="avatar">?</div>
 
-          <div class="person-details">
-            <h2>Select a player</h2>
-            <p>Private one-to-one conversation</p>
+          <div class="person-left">
+            <div class="avatar" id="chatAvatar">?</div>
+
+            <div class="person-details">
+              <h2 id="chatPlayerName">Select a player</h2>
+              <p id="chatPlayerStatus">
+                Private one-to-one conversation
+              </p>
+            </div>
           </div>
+
+          <div class="chat-options">
+            <button type="button" class="small-option"
+              id="reportPlayer">
+              REPORT
+            </button>
+
+            <button type="button" class="small-option"
+              id="blockPlayer">
+              BLOCK
+            </button>
+          </div>
+
         </header>
 
-        <div class="chat-messages">
+        <div class="chat-messages" id="chatMessages">
 
           <div class="empty-chat-icon">💬</div>
 
@@ -307,7 +552,47 @@
 
         </div>
 
+        <div class="reply-preview" id="replyPreview">
+          <div class="reply-preview-content">
+            <div class="reply-preview-label" id="replySender">
+              Replying to
+            </div>
+
+            <div class="reply-preview-text" id="replyText"></div>
+          </div>
+
+          <button type="button" class="cancel-reply"
+            id="cancelReply" aria-label="Cancel reply">
+            ×
+          </button>
+        </div>
+
+        <div class="image-preview" id="imagePreview">
+          <img id="previewImage" src="" alt="Selected image preview">
+
+          <div class="image-preview-info" id="imagePreviewName">
+            Selected image
+          </div>
+
+          <button type="button" class="remove-image"
+            id="removeImage" aria-label="Remove selected image">
+            ×
+          </button>
+        </div>
+
         <form class="chat-composer" id="privateChatForm">
+
+          <input
+            type="file"
+            id="privateChatImage"
+            accept="image/*"
+            hidden
+          >
+
+          <button type="button" class="attach-btn"
+            id="attachImage" aria-label="Attach image">
+            📎
+          </button>
 
           <input
             type="text"
@@ -316,32 +601,218 @@
             autocomplete="off"
           >
 
-          <button type="submit">SEND</button>
+          <button type="submit" class="send-btn">SEND</button>
 
         </form>
 
         <div class="chat-note">
-          Keep conversations respectful. Reporting and blocking
-          controls will be available when messaging is connected.
+          Keep conversations respectful. Harassment, threats and
+          intimidation are not allowed.
+          <br><br>
+          Swipe a message to the right or tap REPLY to respond
+          to that specific message.
         </div>
 
       </section>
 
     </section>
 
+    <div class="backend-notice">
+      <strong>Backend connection pending:</strong>
+      Private conversations, player selection, real-time message
+      delivery, message history, image sharing, reporting and blocking
+      will be connected securely during backend integration.
+      Selected images are currently previewed on this device only.
+    </div>
+
   </main>
 
   <script>
+    const replyPreview = document.getElementById("replyPreview");
+    const replySender = document.getElementById("replySender");
+    const replyText = document.getElementById("replyText");
+    const cancelReply = document.getElementById("cancelReply");
+
+    const messageInput = document.getElementById("privateMessage");
+
+    const imageInput = document.getElementById("privateChatImage");
+    const attachImage = document.getElementById("attachImage");
+    const imagePreview = document.getElementById("imagePreview");
+    const previewImage = document.getElementById("previewImage");
+    const imagePreviewName = document.getElementById("imagePreviewName");
+    const removeImage = document.getElementById("removeImage");
+
+    const chatMessages = document.getElementById("chatMessages");
+
+    let selectedReply = null;
+    let selectedImageURL = null;
+
+    function startReply(messageElement) {
+      const sender = messageElement.dataset.sender || "Player";
+      const message = messageElement.dataset.message || "Image";
+
+      selectedReply = {
+        sender: sender,
+        message: message
+      };
+
+      replySender.textContent = "Replying to " + sender;
+      replyText.textContent = message;
+
+      replyPreview.classList.add("visible");
+      messageInput.placeholder = "Write your reply...";
+      messageInput.focus();
+    }
+
+    function setupMessageActions(container) {
+      container.querySelectorAll(".message-item").forEach(function(message) {
+
+        if (message.dataset.replyReady === "true") return;
+        message.dataset.replyReady = "true";
+
+        const replyButton = message.querySelector(".reply-action");
+
+        if (replyButton) {
+          replyButton.addEventListener("click", function() {
+            startReply(message);
+          });
+        }
+
+        let startX = 0;
+        let startY = 0;
+
+        message.addEventListener("touchstart", function(event) {
+          startX = event.changedTouches[0].clientX;
+          startY = event.changedTouches[0].clientY;
+        }, { passive: true });
+
+        message.addEventListener("touchend", function(event) {
+          const endX = event.changedTouches[0].clientX;
+          const endY = event.changedTouches[0].clientY;
+
+          const distanceX = endX - startX;
+          const distanceY = Math.abs(endY - startY);
+
+          if (distanceX > 65 && distanceY < 60) {
+            startReply(message);
+          }
+        }, { passive: true });
+      });
+    }
+
+    setupMessageActions(chatMessages);
+
+    cancelReply.addEventListener("click", function() {
+      selectedReply = null;
+      replyPreview.classList.remove("visible");
+      messageInput.placeholder = "Write a private message...";
+    });
+
+    attachImage.addEventListener("click", function() {
+      imageInput.click();
+    });
+
+    imageInput.addEventListener("change", function() {
+      const file = imageInput.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        alert("Please select an image file.");
+        imageInput.value = "";
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Please select an image smaller than 5 MB.");
+        imageInput.value = "";
+        return;
+      }
+
+      if (selectedImageURL) {
+        URL.revokeObjectURL(selectedImageURL);
+      }
+
+      selectedImageURL = URL.createObjectURL(file);
+
+      previewImage.src = selectedImageURL;
+      imagePreviewName.textContent = file.name;
+      imagePreview.classList.add("visible");
+    });
+
+    removeImage.addEventListener("click", function() {
+      if (selectedImageURL) {
+        URL.revokeObjectURL(selectedImageURL);
+        selectedImageURL = null;
+      }
+
+      imageInput.value = "";
+      previewImage.src = "";
+      imagePreview.classList.remove("visible");
+    });
+
     document.getElementById("privateChatForm").addEventListener(
       "submit",
       function(event) {
         event.preventDefault();
 
+        const message = messageInput.value.trim();
+        const hasImage = imageInput.files.length > 0;
+
+        if (!message && !hasImage) {
+          alert("Write a message or select an image first.");
+          return;
+        }
+
         alert(
-          "Private messaging will become available after secure backend integration."
+          "Your private message and selected image are ready. " +
+          "Actual delivery will be activated after secure backend integration."
         );
       }
     );
+
+    document.getElementById("conversationSearch").addEventListener(
+      "input",
+      function() {
+        const search = this.value.trim();
+
+        if (search) {
+          document.getElementById("emptyConversations").innerHTML =
+            '<div style="font-size:30px; margin-bottom:10px;">🔎</div>' +
+            '<strong>No matching conversations</strong>' +
+            '<p>Your conversations will appear here after messaging is connected.</p>';
+        } else {
+          document.getElementById("emptyConversations").innerHTML =
+            '<div style="font-size:30px; margin-bottom:10px;">👥</div>' +
+            '<strong>No conversations yet</strong>' +
+            '<p>When you start chatting with a player, your conversations will appear here.</p>';
+        }
+      }
+    );
+
+    document.getElementById("reportPlayer").addEventListener(
+      "click",
+      function() {
+        alert(
+          "Player reporting will be available after secure backend integration."
+        );
+      }
+    );
+
+    document.getElementById("blockPlayer").addEventListener(
+      "click",
+      function() {
+        alert(
+          "Player blocking will be available after secure backend integration."
+        );
+      }
+    );
+
+    window.addEventListener("beforeunload", function() {
+      if (selectedImageURL) {
+        URL.revokeObjectURL(selectedImageURL);
+      }
+    });
   </script>
 
 </body>
