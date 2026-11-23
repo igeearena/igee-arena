@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080817">
+  <meta name="description" content="Create and manage player challenges on IGEE ARENA.">
   <title>Challenges | IGEE ARENA</title>
   <link rel="stylesheet" href="css/style.css">
 
@@ -56,9 +58,7 @@
       font-weight: bold;
     }
 
-    .hero {
-      padding: 35px 0 20px;
-    }
+    .hero { padding: 35px 0 20px; }
 
     .hero h1 {
       font-size: clamp(28px, 6vw, 42px);
@@ -80,7 +80,7 @@
       color: #dfd2ff;
       border-radius: 9px;
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .section-title {
@@ -111,6 +111,15 @@
       color: white;
     }
 
+    .tab:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid #a78bfa;
+      outline-offset: 3px;
+    }
+
     .panel {
       padding: 20px;
       border: 1px solid #292943;
@@ -119,9 +128,7 @@
       margin-bottom: 20px;
     }
 
-    .form-group {
-      margin-bottom: 17px;
-    }
+    .form-group { margin-bottom: 17px; }
 
     .form-group label {
       display: block;
@@ -159,7 +166,7 @@
       margin-top: 7px;
       color: #9292ae;
       font-size: 11px;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .main-btn {
@@ -172,6 +179,11 @@
       font-size: 13px;
       font-weight: 900;
       cursor: pointer;
+    }
+
+    .main-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
     }
 
     .challenge-list {
@@ -188,6 +200,11 @@
       border-radius: 12px;
       font-size: 13px;
       line-height: 1.7;
+    }
+
+    .empty-icon {
+      font-size: 35px;
+      margin-bottom: 10px;
     }
 
     .challenge-card {
@@ -251,7 +268,13 @@
       background: #29213d;
       color: #dfd2ff;
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    .message.error {
+      border-color: #914b5a;
+      background: #351b29;
+      color: #ffc6d0;
     }
 
     .footer {
@@ -272,6 +295,7 @@
     @media(max-width: 420px) {
       .page { padding: 14px; }
       .panel { padding: 15px; }
+      .header { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -295,15 +319,18 @@
       <h1>PLAYER CHALLENGES</h1>
       <p>
         Find opponents, create competitions and prepare
-        to prove yourself in the arena.
+        to prove yourself in the arena. Challenge players
+        and build your reputation through skill.
       </p>
     </section>
 
     <div class="notice">
-      <strong>Competition preview:</strong>
-      Challenge creation, acceptance and match tracking
-      will be activated after secure backend integration.
-      No entry fees or real-money matches are active here.
+      <strong>Challenge system preview:</strong>
+      This page is being prepared for secure account and
+      match integration. Challenge creation, acceptance,
+      notifications and match tracking are not live yet.
+      Proposed stakes are for planning only. No entry fees,
+      deposits or real-money matches are active here.
     </div>
 
     <h2 class="section-title">CREATE A CHALLENGE</h2>
@@ -315,7 +342,7 @@
 
           <div class="form-group">
             <label for="game">Select Game</label>
-            <select id="game" required>
+            <select id="game" name="game" required>
               <option value="">Choose a game</option>
               <option>Dream League Soccer 2026</option>
               <option>Call of Duty Mobile</option>
@@ -346,20 +373,24 @@
             <input
               type="text"
               id="opponent"
+              name="opponent"
               placeholder="Enter 6-digit player ID"
               inputmode="numeric"
               pattern="[0-9]{6}"
               maxlength="6"
+              minlength="6"
+              autocomplete="off"
               required
             >
             <span class="form-help">
-              Enter the unique player ID of the person you want to challenge.
+              Enter the unique six-digit player ID of the person
+              you want to challenge.
             </span>
           </div>
 
           <div class="form-group">
             <label for="mode">Competition Mode</label>
-            <select id="mode" required>
+            <select id="mode" name="mode" required>
               <option value="">Select a mode</option>
               <option>One-on-One</option>
               <option>Team Competition</option>
@@ -369,7 +400,33 @@
 
           <div class="form-group">
             <label for="schedule">Preferred Match Time</label>
-            <input type="datetime-local" id="schedule" required>
+            <input
+              type="datetime-local"
+              id="schedule"
+              name="schedule"
+              required
+            >
+            <span class="form-help">
+              Choose your preferred date and time.
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="stake">Proposed Stake (₦)</label>
+            <input
+              type="number"
+              id="stake"
+              name="stake"
+              min="0"
+              step="1"
+              inputmode="numeric"
+              placeholder="Enter proposed amount"
+            >
+            <span class="form-help">
+              Optional preview field. No money is collected.
+              When the backend is activated, opponents will only
+              be able to accept the exact same stake amount.
+            </span>
           </div>
 
         </div>
@@ -378,35 +435,57 @@
           <label for="rules">Additional Match Details</label>
           <textarea
             id="rules"
+            name="rules"
             maxlength="500"
             placeholder="Add any agreed match details or rules..."
           ></textarea>
+          <span class="form-help">
+            Maximum 500 characters.
+          </span>
         </div>
 
         <button type="submit" class="main-btn">
           CREATE CHALLENGE
         </button>
 
-        <div class="message" id="formMessage"></div>
+        <div
+          class="message"
+          id="formMessage"
+          role="status"
+          aria-live="polite"
+        ></div>
       </form>
     </section>
 
     <h2 class="section-title">YOUR CHALLENGES</h2>
 
-    <div class="tabs">
-      <button class="tab active" data-tab="all">ALL</button>
-      <button class="tab" data-tab="incoming">INCOMING</button>
-      <button class="tab" data-tab="outgoing">OUTGOING</button>
-      <button class="tab" data-tab="active">ACTIVE MATCHES</button>
+    <div class="tabs" role="group" aria-label="Filter challenges">
+      <button type="button" class="tab active" data-tab="all" aria-pressed="true">
+        ALL
+      </button>
+      <button type="button" class="tab" data-tab="incoming" aria-pressed="false">
+        INCOMING
+      </button>
+      <button type="button" class="tab" data-tab="outgoing" aria-pressed="false">
+        OUTGOING
+      </button>
+      <button type="button" class="tab" data-tab="active" aria-pressed="false">
+        ACTIVE MATCHES
+      </button>
     </div>
 
-    <section class="challenge-list" id="challengeList">
+    <section
+      class="challenge-list"
+      id="challengeList"
+      aria-live="polite"
+    >
       <div class="empty-state">
-        <div style="font-size:35px; margin-bottom:10px;">⚔️</div>
+        <div class="empty-icon">⚔️</div>
         <strong>No challenges yet</strong>
         <p>
           Your incoming, outgoing and active matches
-          will appear here after your account is connected.
+          will appear here after your account is connected
+          to the secure challenge system.
         </p>
       </div>
     </section>
@@ -422,25 +501,168 @@
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
-    const challengeForm = document.getElementById("challengeForm");
-    const formMessage = document.getElementById("formMessage");
+    const challengeForm =
+      document.getElementById("challengeForm");
+
+    const formMessage =
+      document.getElementById("formMessage");
+
+    const opponentInput =
+      document.getElementById("opponent");
+
+    const stakeInput =
+      document.getElementById("stake");
+
+    const challengeList =
+      document.getElementById("challengeList");
+
+    const tabs =
+      document.querySelectorAll(".tab");
+
+    const emptyStates = {
+      all: {
+        icon: "⚔️",
+        title: "No challenges yet",
+        description:
+          "Your incoming, outgoing and active matches will appear here after your account is connected."
+      },
+
+      incoming: {
+        icon: "📩",
+        title: "No incoming challenges",
+        description:
+          "Challenges sent to you by other players will appear here."
+      },
+
+      outgoing: {
+        icon: "📤",
+        title: "No outgoing challenges",
+        description:
+          "Challenges you send to other players will appear here."
+      },
+
+      active: {
+        icon: "🏆",
+        title: "No active matches",
+        description:
+          "Accepted challenges and ongoing matches will appear here."
+      }
+    };
+
+    function showMessage(message, isError) {
+      formMessage.style.display = "block";
+      formMessage.textContent = message;
+      formMessage.classList.toggle("error", Boolean(isError));
+    }
+
+    function hideMessage() {
+      formMessage.style.display = "none";
+      formMessage.textContent = "";
+      formMessage.classList.remove("error");
+    }
+
+    function showEmptyState(tabName) {
+      const state = emptyStates[tabName] || emptyStates.all;
+
+      challengeList.innerHTML = "";
+
+      const emptyState = document.createElement("div");
+      emptyState.className = "empty-state";
+
+      const icon = document.createElement("div");
+      icon.className = "empty-icon";
+      icon.textContent = state.icon;
+
+      const heading = document.createElement("strong");
+      heading.textContent = state.title;
+
+      const description = document.createElement("p");
+      description.textContent = state.description;
+
+      emptyState.appendChild(icon);
+      emptyState.appendChild(heading);
+      emptyState.appendChild(description);
+
+      challengeList.appendChild(emptyState);
+    }
 
     challengeForm.addEventListener("submit", function(event) {
       event.preventDefault();
+      hideMessage();
 
-      formMessage.style.display = "block";
-      formMessage.textContent =
-        "Your challenge form is ready. Challenge creation will work after secure account and match integration.";
+      if (!challengeForm.checkValidity()) {
+        challengeForm.reportValidity();
+        return;
+      }
+
+      const opponentId = opponentInput.value.trim();
+
+      if (!/^[0-9]{6}$/.test(opponentId)) {
+        showMessage(
+          "Please enter a valid six-digit opponent Player ID.",
+          true
+        );
+        opponentInput.focus();
+        return;
+      }
+
+      const stake = stakeInput.value.trim();
+
+      if (stake !== "" && (
+        !Number.isFinite(Number(stake)) ||
+        Number(stake) < 0
+      )) {
+        showMessage(
+          "Please enter a valid proposed stake amount.",
+          true
+        );
+        stakeInput.focus();
+        return;
+      }
+
+      const selectedDate =
+        new Date(document.getElementById("schedule").value);
+
+      if (Number.isNaN(selectedDate.getTime())) {
+        showMessage(
+          "Please select a valid preferred match time.",
+          true
+        );
+        return;
+      }
+
+      showMessage(
+        "Your challenge details passed the page's basic checks. " +
+        "They have NOT been sent or saved. Secure account verification, " +
+        "opponent lookup, exact stake matching, challenge notifications " +
+        "and backend match integration must be completed before " +
+        "challenges can be created.",
+        false
+      );
     });
 
-    document.querySelectorAll(".tab").forEach(function(tab) {
+    tabs.forEach(function(tab) {
       tab.addEventListener("click", function() {
-        document.querySelectorAll(".tab").forEach(function(item) {
+        tabs.forEach(function(item) {
           item.classList.remove("active");
+          item.setAttribute("aria-pressed", "false");
         });
 
         tab.classList.add("active");
+        tab.setAttribute("aria-pressed", "true");
+
+        showEmptyState(tab.dataset.tab);
       });
+    });
+
+    opponentInput.addEventListener("input", function() {
+      this.value = this.value.replace(/\D/g, "").slice(0, 6);
+    });
+
+    stakeInput.addEventListener("input", function() {
+      if (Number(this.value) < 0) {
+        this.value = "";
+      }
     });
   </script>
 </body>
