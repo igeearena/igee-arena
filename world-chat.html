@@ -3,15 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
   <title>WORLD CHAT | IGEE ARENA</title>
   <link rel="stylesheet" href="css/style.css">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background: #080817;
       color: #f7f7ff;
       font-family: Arial, sans-serif;
       margin: 0;
+    }
+
+    button, input {
+      font-family: inherit;
     }
 
     .chat-page {
@@ -44,6 +53,7 @@
       color: #aaaac5;
       font-size: 14px;
       margin-bottom: 18px;
+      line-height: 1.6;
     }
 
     .online-status {
@@ -118,11 +128,19 @@
     .messages {
       padding: 17px;
       min-height: 300px;
+      overflow: hidden;
     }
 
     .message {
       margin-bottom: 20px;
       max-width: 85%;
+      position: relative;
+      touch-action: pan-y;
+      transition: transform 0.15s ease;
+    }
+
+    .message.swiping {
+      transition: none;
     }
 
     .message-name {
@@ -146,6 +164,7 @@
       color: #ededfa;
       font-size: 14px;
       line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
     .message-time {
@@ -159,14 +178,108 @@
       background: #21183b;
     }
 
+    .reply-action {
+      display: block;
+      border: none;
+      background: transparent;
+      color: #a78bfa;
+      padding: 6px 0 0;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .reply-action:active {
+      color: #fff;
+    }
+
+    .reply-preview {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 14px;
+      background: #21183b;
+      border-top: 1px solid #614b91;
+    }
+
+    .reply-preview.visible {
+      display: flex;
+    }
+
+    .reply-preview-content {
+      min-width: 0;
+      border-left: 3px solid #a78bfa;
+      padding-left: 10px;
+    }
+
+    .reply-preview-label {
+      color: #c4a5ff;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .reply-preview-text {
+      color: #d2cce5;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .cancel-reply {
+      flex-shrink: 0;
+      border: none;
+      background: transparent;
+      color: #aaaac5;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .image-preview {
+      display: none;
+      padding: 12px;
+      border-top: 1px solid #292945;
+      background: #15152b;
+    }
+
+    .image-preview.visible {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .image-preview img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #493779;
+    }
+
+    .image-preview-info {
+      flex: 1;
+      min-width: 0;
+      color: #c5b5ff;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .remove-image {
+      background: transparent;
+      border: none;
+      color: #ff8585;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
     .chat-composer {
       display: flex;
+      align-items: center;
       gap: 9px;
       padding: 14px;
       border-top: 1px solid #292945;
     }
 
-    .chat-composer input {
+    .chat-composer input[type="text"] {
       flex: 1;
       min-width: 0;
       background: #080817;
@@ -177,20 +290,49 @@
       outline: none;
     }
 
-    .chat-composer button {
+    .chat-composer input:focus {
+      border-color: #8b5cf6;
+    }
+
+    .attach-btn {
+      width: 43px;
+      height: 43px;
+      flex-shrink: 0;
+      background: #252044;
+      border: 1px solid #493779;
+      border-radius: 10px;
+      color: #c4a5ff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .send-btn {
       background: #8b5cf6;
       border: none;
       border-radius: 10px;
-      padding: 0 18px;
+      padding: 0 17px;
+      height: 43px;
       color: white;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .chat-note {
       color: #777794;
       font-size: 11px;
-      line-height: 1.5;
+      line-height: 1.6;
       padding: 0 15px 15px;
+    }
+
+    .backend-notice {
+      margin-top: 15px;
+      padding: 13px;
+      background: #25213a;
+      border: 1px solid #554278;
+      border-radius: 10px;
+      color: #d4c5f5;
+      font-size: 11px;
+      line-height: 1.6;
     }
 
     @media (max-width: 480px) {
@@ -200,6 +342,15 @@
 
       .message {
         max-width: 95%;
+      }
+
+      .chat-composer {
+        gap: 6px;
+        padding: 10px;
+      }
+
+      .send-btn {
+        padding: 0 12px;
       }
     }
   </style>
@@ -241,66 +392,276 @@
         <p>Members, owner and authorized admins</p>
       </div>
 
-      <div class="messages">
+      <div class="messages" id="messages">
 
-        <div class="message">
+        <div class="message" data-sender="Arena Player"
+          data-message="Welcome everyone! Let's enjoy the competition.">
+
           <div class="message-name">Arena Player</div>
+
           <div class="message-bubble">
             Welcome everyone! Let's enjoy the competition.
           </div>
+
           <div class="message-time">Example message</div>
+
+          <button type="button" class="reply-action">
+            ↩ Reply
+          </button>
         </div>
 
-        <div class="message official">
+        <div class="message official"
+          data-sender="IGEE ARENA"
+          data-message="Official tournament announcements and community updates will also be shared in this chat.">
+
           <div class="message-name">
             IGEE ARENA
             <span class="role-tag">OFFICIAL</span>
           </div>
+
           <div class="message-bubble">
             Official tournament announcements and community updates
             will also be shared in this chat.
           </div>
+
           <div class="message-time">Official announcement example</div>
+
+          <button type="button" class="reply-action">
+            ↩ Reply
+          </button>
         </div>
 
-        <div class="message">
+        <div class="message"
+          data-sender="Another Player"
+          data-message="Looking forward to challenging other players!">
+
           <div class="message-name">Another Player</div>
+
           <div class="message-bubble">
             Looking forward to challenging other players!
           </div>
+
           <div class="message-time">Example message</div>
+
+          <button type="button" class="reply-action">
+            ↩ Reply
+          </button>
         </div>
 
       </div>
 
+      <div class="reply-preview" id="replyPreview">
+        <div class="reply-preview-content">
+          <div class="reply-preview-label" id="replySender">
+            Replying to
+          </div>
+          <div class="reply-preview-text" id="replyText"></div>
+        </div>
+
+        <button type="button" class="cancel-reply"
+          id="cancelReply" aria-label="Cancel reply">
+          ×
+        </button>
+      </div>
+
+      <div class="image-preview" id="imagePreview">
+        <img id="previewImage" src="" alt="Selected image preview">
+
+        <div class="image-preview-info" id="imagePreviewName">
+          Selected image
+        </div>
+
+        <button type="button" class="remove-image"
+          id="removeImage" aria-label="Remove selected image">
+          ×
+        </button>
+      </div>
+
       <form class="chat-composer" id="worldChatForm">
+
+        <input
+          type="file"
+          id="worldChatImage"
+          accept="image/*"
+          hidden
+        >
+
+        <button type="button" class="attach-btn"
+          id="attachImage" aria-label="Attach image">
+          📎
+        </button>
+
         <input
           type="text"
           id="worldChatMessage"
           placeholder="Write a message..."
           autocomplete="off"
         >
-        <button type="submit">SEND</button>
+
+        <button type="submit" class="send-btn">SEND</button>
+
       </form>
 
       <div class="chat-note">
         Be respectful. Harassment, threats and cheating are not allowed.
-        Reporting, blocking and moderation will be connected during
-        the backend stage.
+        Use image sharing responsibly. Reporting, blocking and moderation
+        will be connected during the backend stage.
+        <br><br>
+        Swipe a message to the right or tap REPLY to respond to it.
       </div>
 
     </section>
 
+    <div class="backend-notice">
+      <strong>Backend connection pending:</strong>
+      Messages, image delivery, real-time updates and shared chat history
+      will become available after secure backend integration.
+      Selected images are currently previewed on this device only.
+    </div>
+
   </main>
 
   <script>
+    const replyPreview = document.getElementById("replyPreview");
+    const replySender = document.getElementById("replySender");
+    const replyText = document.getElementById("replyText");
+    const cancelReply = document.getElementById("cancelReply");
+    const messageInput = document.getElementById("worldChatMessage");
+
+    const imageInput = document.getElementById("worldChatImage");
+    const attachImage = document.getElementById("attachImage");
+    const imagePreview = document.getElementById("imagePreview");
+    const previewImage = document.getElementById("previewImage");
+    const imagePreviewName = document.getElementById("imagePreviewName");
+    const removeImage = document.getElementById("removeImage");
+
+    let selectedReply = null;
+    let selectedImageURL = null;
+
+    function startReply(messageElement) {
+      selectedReply = {
+        sender: messageElement.dataset.sender,
+        message: messageElement.dataset.message
+      };
+
+      replySender.textContent = "Replying to " + selectedReply.sender;
+      replyText.textContent = selectedReply.message;
+
+      replyPreview.classList.add("visible");
+      messageInput.placeholder = "Write your reply...";
+      messageInput.focus();
+    }
+
+    document.querySelectorAll(".message").forEach(function(message) {
+
+      const replyButton = message.querySelector(".reply-action");
+
+      replyButton.addEventListener("click", function() {
+        startReply(message);
+      });
+
+      let startX = 0;
+      let startY = 0;
+
+      message.addEventListener("touchstart", function(event) {
+        startX = event.changedTouches[0].clientX;
+        startY = event.changedTouches[0].clientY;
+        message.classList.add("swiping");
+      }, { passive: true });
+
+      message.addEventListener("touchend", function(event) {
+        const endX = event.changedTouches[0].clientX;
+        const endY = event.changedTouches[0].clientY;
+
+        const distanceX = endX - startX;
+        const distanceY = Math.abs(endY - startY);
+
+        message.classList.remove("swiping");
+
+        if (distanceX > 65 && distanceY < 60) {
+          startReply(message);
+        }
+      }, { passive: true });
+
+      message.addEventListener("touchcancel", function() {
+        message.classList.remove("swiping");
+      });
+    });
+
+    cancelReply.addEventListener("click", function() {
+      selectedReply = null;
+      replyPreview.classList.remove("visible");
+      messageInput.placeholder = "Write a message...";
+    });
+
+    attachImage.addEventListener("click", function() {
+      imageInput.click();
+    });
+
+    imageInput.addEventListener("change", function() {
+      const file = imageInput.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        alert("Please select an image file.");
+        imageInput.value = "";
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Please select an image smaller than 5 MB.");
+        imageInput.value = "";
+        return;
+      }
+
+      if (selectedImageURL) {
+        URL.revokeObjectURL(selectedImageURL);
+      }
+
+      selectedImageURL = URL.createObjectURL(file);
+
+      previewImage.src = selectedImageURL;
+      imagePreviewName.textContent = file.name;
+      imagePreview.classList.add("visible");
+    });
+
+    removeImage.addEventListener("click", function() {
+      if (selectedImageURL) {
+        URL.revokeObjectURL(selectedImageURL);
+        selectedImageURL = null;
+      }
+
+      imageInput.value = "";
+      previewImage.src = "";
+      imagePreview.classList.remove("visible");
+    });
+
     document.getElementById("worldChatForm").addEventListener(
       "submit",
       function(event) {
         event.preventDefault();
-        alert("WORLD CHAT messaging will be activated when the secure backend is connected.");
+
+        const message = messageInput.value.trim();
+        const hasImage = imageInput.files.length > 0;
+
+        if (!message && !hasImage) {
+          alert("Write a message or select an image first.");
+          return;
+        }
+
+        alert(
+          "Your message and selected image are ready for the chat. " +
+          "Actual delivery will be activated after secure backend integration."
+        );
       }
     );
+
+    window.addEventListener("beforeunload", function() {
+      if (selectedImageURL) {
+        URL.revokeObjectURL(selectedImageURL);
+      }
+    });
   </script>
 
 </body>
