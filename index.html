@@ -1,13 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080817">
-  <meta name="description" content="IGEE ARENA - Your Skill. Your Glory. Challenge players and compete in your favourite games.">
+  <meta name="description" content="IGEE ARENA - Challenge real players, compete in skill-based matches, stake money and win. Your Skill. Your Glory.">
   <title>IGEE ARENA | Your Skill. Your Glory.</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .money-section {
+      padding: 65px 6%;
+      background: linear-gradient(135deg, #111126, #1b1033, #080817);
+      text-align: center;
+    }
+
+    .money-content {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .money-content h2 {
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.2;
+      margin: 15px 0;
+    }
+
+    .money-content h2 span {
+      color: #a78bfa;
+    }
+
+    .money-content p {
+      color: #d0cce0;
+      line-height: 1.8;
+      font-size: 16px;
+      margin: 15px auto;
+      max-width: 700px;
+    }
+
+    .money-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .money-feature {
+      padding: 22px 15px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(167,139,250,0.25);
+      border-radius: 15px;
+    }
+
+    .money-feature strong {
+      display: block;
+      color: #a78bfa;
+      margin-bottom: 8px;
+    }
+
+    .money-feature p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .money-note {
+      font-size: 12px !important;
+      opacity: 0.75;
+      margin-top: 25px !important;
+    }
+
+    /* Keep game names only in their bottom labels. */
+    .game-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
 </head>
+
 <body>
 
   <header class="site-header">
@@ -31,7 +103,7 @@
 
   <main>
 
-    <!-- HERO BACKGROUND -->
+    <!-- HERO -->
     <section class="hero" id="home">
 
       <div class="hero-background">
@@ -60,6 +132,71 @@
         <a href="#games" class="btn btn-primary">
           EXPLORE GAMES
         </a>
+      </div>
+
+    </section>
+
+    <!-- REAL MONEY COMPETITIONS -->
+    <section class="money-section" id="compete">
+
+      <div class="money-content">
+
+        <span class="eyebrow">SKILL MEETS REWARDS</span>
+
+        <h2>
+          YOUR SKILL. YOUR STAKE.
+          <span>YOUR GLORY.</span>
+        </h2>
+
+        <p>
+          Don't just play games. Challenge real players
+          and put your gaming skills to the test.
+          Choose your match, agree on your stake,
+          compete against your opponent and win money
+          when you claim victory.
+        </p>
+
+        <p>
+          From exciting 1v1 challenges to team battles,
+          IGEE ARENA gives you a place to compete,
+          challenge rivals and earn rewards through
+          your gaming performance.
+        </p>
+
+        <div class="money-features">
+
+          <div class="money-feature">
+            <strong>⚔ CHALLENGE PLAYERS</strong>
+            <p>Find opponents and compete in your favourite games.</p>
+          </div>
+
+          <div class="money-feature">
+            <strong>💰 CHOOSE YOUR STAKE</strong>
+            <p>Agree on a match stake before the competition begins.</p>
+          </div>
+
+          <div class="money-feature">
+            <strong>🏆 WIN REWARDS</strong>
+            <p>Win your match and receive your eligible prize payout.</p>
+          </div>
+
+          <div class="money-feature">
+            <strong>👛 CONTROL YOUR WALLET</strong>
+            <p>Manage your balance and keep track of your transactions.</p>
+          </div>
+
+        </div>
+
+        <p class="money-note">
+          Match participation requires an agreed stake.
+          Only compete with money you can afford to lose.
+          Winnings are subject to match verification and platform rules.
+        </p>
+
+        <a href="register.html" class="btn btn-primary">
+          JOIN THE ARENA
+        </a>
+
       </div>
 
     </section>
@@ -112,43 +249,43 @@
 
           <article class="game-card">
             <span class="game-number">01</span>
-            <img src="assets/images/games/call-of-duty-mobile.webp" alt="Call of Duty Mobile" loading="lazy">
+            <img src="assets/images/games/call-of-duty-mobile.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>CALL OF DUTY MOBILE</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">02</span>
-            <img src="assets/images/games/pubg-mobile.webp" alt="PUBG Mobile" loading="lazy">
+            <img src="assets/images/games/pubg-mobile.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>PUBG MOBILE</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">03</span>
-            <img src="assets/images/games/blood-strike.webp" alt="Blood Strike" loading="lazy">
+            <img src="assets/images/games/blood-strike.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>BLOOD STRIKE</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">04</span>
-            <img src="assets/images/games/free-fire.webp" alt="Free Fire" loading="lazy">
+            <img src="assets/images/games/free-fire.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>FREE FIRE</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">05</span>
-            <img src="assets/images/games/arena-breakout.webp" alt="Arena Breakout" loading="lazy">
+            <img src="assets/images/games/arena-breakout.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>ARENA BREAKOUT</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">06</span>
-            <img src="assets/images/games/rocket-league.webp" alt="Rocket League Sideswipe" loading="lazy">
+            <img src="assets/images/games/rocket-league.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>ROCKET LEAGUE SIDESWIPE</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">07</span>
-            <img src="assets/images/games/mortal-kombat.webp" alt="Mortal Kombat 1" loading="lazy">
+            <img src="assets/images/games/mortal-kombat.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>MORTAL KOMBAT 1</h4>
           </article>
 
@@ -164,19 +301,19 @@
 
           <article class="game-card">
             <span class="game-number">08</span>
-            <img src="assets/images/games/dream-league-soccer.webp" alt="Dream League Soccer" loading="lazy">
+            <img src="assets/images/games/dream-league-soccer.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>DREAM LEAGUE SOCCER</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">09</span>
-            <img src="assets/images/games/efootball.webp" alt="eFootball" loading="lazy">
+            <img src="assets/images/games/efootball.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>eFOOTBALL</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">10</span>
-            <img src="assets/images/games/8-ball-pool.webp" alt="8 Ball Pool" loading="lazy">
+            <img src="assets/images/games/8-ball-pool.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>8-BALL POOL</h4>
           </article>
 
@@ -192,43 +329,43 @@
 
           <article class="game-card">
             <span class="game-number">11</span>
-            <img src="assets/images/games/chess.webp" alt="Chess" loading="lazy">
+            <img src="assets/images/games/chess.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>CHESS</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">12</span>
-            <img src="assets/images/games/ludo-king.webp" alt="Ludo King" loading="lazy">
+            <img src="assets/images/games/ludo-king.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>LUDO KING</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">13</span>
-            <img src="assets/images/games/uno.webp" alt="UNO" loading="lazy">
+            <img src="assets/images/games/uno.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>UNO!</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">14</span>
-            <img src="assets/images/games/scrabble-go.webp" alt="Scrabble GO" loading="lazy">
+            <img src="assets/images/games/scrabble-go.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>SCRABBLE GO</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">15</span>
-            <img src="assets/images/games/checkers.webp" alt="Checkers" loading="lazy">
+            <img src="assets/images/games/checkers.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>CHECKERS</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">16</span>
-            <img src="assets/images/games/mancala.webp" alt="Mancala" loading="lazy">
+            <img src="assets/images/games/mancala.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>MANCALA</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">17</span>
-            <img src="assets/images/games/gin-rummy.webp" alt="Gin Rummy" loading="lazy">
+            <img src="assets/images/games/gin-rummy.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>GIN RUMMY</h4>
           </article>
 
@@ -244,25 +381,25 @@
 
           <article class="game-card">
             <span class="game-number">18</span>
-            <img src="assets/images/games/sea-battle-2.webp" alt="Sea Battle 2" loading="lazy">
+            <img src="assets/images/games/sea-battle-2.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>SEA BATTLE 2</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">19</span>
-            <img src="assets/images/games/four-in-a-row.webp" alt="Four in a Row" loading="lazy">
+            <img src="assets/images/games/four-in-a-row.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>FOUR IN A ROW</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">20</span>
-            <img src="assets/images/games/dots-and-boxes.webp" alt="Dots and Boxes" loading="lazy">
+            <img src="assets/images/games/dots-and-boxes.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>DOTS AND BOXES</h4>
           </article>
 
           <article class="game-card">
             <span class="game-number">21</span>
-            <img src="assets/images/games/stick-fight.webp" alt="Stick Fight The Game" loading="lazy">
+            <img src="assets/images/games/stick-fight.webp" alt="" aria-hidden="true" loading="lazy" onerror="this.hidden=true">
             <h4>STICK FIGHT: THE GAME</h4>
           </article>
 
@@ -290,9 +427,9 @@
         </h2>
 
         <p>
-          IGEE ARENA is being built to bring competitive
-          gamers together in one community where skill,
-          fair play and respect matter.
+          IGEE ARENA brings competitive gamers together
+          in one community where skill, fair play,
+          exciting challenges and rewards matter.
         </p>
 
       </div>
